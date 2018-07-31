@@ -62,34 +62,34 @@ async function getReadmes() {
   return result;
 }
 
-async function pageBuild() {
-  let readMes = await getReadmes();
-  for (var i = 0, r = 0, row = $("<div class='row justify-content-between'>"); i < gitHubRepos.length; i++, r++) {
-    console.log(gitHubRepos[i].pages);
-    if (r == 3) {
-      $("#mainBody").append(row);
-      row = $("<div class='row justify-content-between'>");
-      r = 0;
-    }
-    row.prepend(`
-      <div class="col-4">
-        <div class="card border-0">
-          <div class="card-header bg-white h5">${gitHubRepos[i].name}</div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].repo}>Github Repo</a></li>
-              <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].pages}>Live Page</a></li>
-              <li class="list-group-item">${gitHubRepos[i].date}</li>
-              <li class="list-group-item">${gitHubRepos[i].description}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    `);
-    if (i == gitHubRepos.length - 1) {
-      $("#mainBody").prepend(row);
-    }
-  }
-}
+// async function pageBuild() {
+//   let readMes = await getReadmes();
+//   for (var i = 0, r = 0, row = $("<div class='row justify-content-between'>"); i < gitHubRepos.length; i++, r++) {
+//     console.log(gitHubRepos[i].pages);
+//     if (r == 3) {
+//       $("#mainBody").append(row);
+//       row = $("<div class='row justify-content-between'>");
+//       r = 0;
+//     }
+//     row.prepend(`
+//       <div class="col-4">
+//         <div class="card border-0">
+//           <div class="card-header bg-white h5">${gitHubRepos[i].name}</div>
+//           <div class="card-body">
+//             <ul class="list-group list-group-flush">
+//               <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].repo}>Github Repo</a></li>
+//               <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].pages}>Live Page</a></li>
+//               <li class="list-group-item">${gitHubRepos[i].date}</li>
+//               <li class="list-group-item">${gitHubRepos[i].description}</li>
+//             </ul>
+//           </div>
+//         </div>
+//       </div>
+//     `);
+//     if (i == gitHubRepos.length - 1) {
+//       $("#mainBody").prepend(row);
+//     }
+//   }
+// }
 
 // pageBuild();

@@ -2,6 +2,6 @@
 let docs = {
   "Home": `HomeText`,
   "Contact": `MiddleText`,
-  "Projects": function(){pageBuild()},
+  "Projects": $("#mainBody").html(),
   "Other Stuff": `TestText`
 }

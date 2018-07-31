@@ -33,3 +33,12 @@
   opacity:1;
   font-style:italic;
 }
+
+.list-group .list-group-item:last-child {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.list-group .list-group-item:last-child:hover {
+  background-color: WhiteSmoke;
+}

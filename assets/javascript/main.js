@@ -1,12 +1,15 @@
 // docs variable comes from docs.js
 // I suspect this project would become a whole lot easier if I knew Node a little better
-$("#headerLinks .btn, .dropdown-menu .dropdown-item").click(function(event) {
+$("#headerLinks .btn:not(.dropdown-toggle)").click(function(event) {
   event.preventDefault();
   $("#headerLinks").children().removeClass("active");
   let text = $(this).text();
-  $(".card-body").html(docs[text])
+  if (text == "Home"){text = "index"};
+  window.location=`./${text.toLowerCase()}.html`
 })
 
-$(document).ready(function() {
-  $(".card-body").html(docs['Home'])
-})
+$(".dropdown-toggle .dropdown-item").click( e=>e.preventDefault )
+
+// $(document).ready(function() {
+//   $(".card-body").html(docs['Home'])
+// })
