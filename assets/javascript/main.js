@@ -5,6 +5,12 @@ $("#headerLinks .btn, .dropdown-menu .dropdown-item").click(function(event) {
   $("#headerLinks").children().removeClass("active");
   let text = $(this).text();
   $(".card-body").html(`
-    <p>${docs[text]}</p>
+    ${docs[text]}
+    `)
+})
+
+$(document).ready(function() {
+  $(".card-body").html(`
+    ${docs['Home']}
     `)
 })
