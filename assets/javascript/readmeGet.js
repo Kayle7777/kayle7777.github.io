@@ -41,11 +41,11 @@ const gitHubRepos = [
   },
   { name: 'Spotify Soundtrack Builder',
     gitHubName: 'Project-1-BootCamp',
-    repo: "https://github.com/PROJECT-1-HACKERS/Project-1-BootCamp",
-    pages: "https://project-1-hackers.github.io/Project-1-BootCamp",
-    readme: "https://raw.githubusercontent.com/PROJECT-1-HACKERS/Project-1-BootCamp/master/README.md",
+    repo: "https://github.com/Kayle7777/Project-1-BootCamp-1",
+    pages: "https://kayle7777.github.io/Project-1-BootCamp-1",
+    readme: "https://raw.githubusercontent.com/Kayle7777/Project-1-BootCamp-1/master/README.md",
     date: "07/28/2018",
-    description: `Now this one was pretty sweet. This is an app which will build you a playlist of a movie's soundtrack on your spotify account. This was especially difficult, because no movie database API has any information on soundtracks -- so I had to scrape IMDb/soundtrack pages for the info. This was neat, I had to learn a bit of RegEx and async / await stuff to get it to work. Very proud of all of this code. While this is technically a group project, let me offer an <a href="https://github.com/PROJECT-1-HACKERS/Project-1-BootCamp/graphs/contributors">insight</a> into who coded the mass majority of this app.`
+    description: `Now this one was pretty sweet. This is an app which will build you a playlist of a movie's soundtrack on your spotify account. This was especially difficult, because no movie database API has any information on soundtracks -- so I had to scrape IMDb/soundtrack pages for the info. This was neat, I had to learn a bit of RegEx and async / await stuff to get it to work. Very proud of all of this code. While this is technically a group project, let me offer an <a href="https://github.com/Kayle7777/Project-1-BootCamp-1/graphs/contributors">insight</a> into who coded the mass majority of this app.`
   }
 ]
 
