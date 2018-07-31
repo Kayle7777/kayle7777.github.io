@@ -1,10 +1,5 @@
-let docs = {
-  "Home": `HomeText`,
-  "Middle": `MiddleText`,
-  "Right": `RightText`,
-  "Other Stuff": `TestText`
-}
-
+// docs variable comes from docs.js
+// I suspect this project would become a whole lot easier if I knew Node a little better
 $("#headerLinks .btn, .dropdown-menu .dropdown-item").click(function(event) {
   event.preventDefault();
   $("#headerLinks").children().removeClass("active");
