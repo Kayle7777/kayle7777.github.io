@@ -2,10 +2,10 @@ let homeStuff = ["test1", "test2", "test3"]
 
 let docs = {
   "Home": '',
-  "Middle": `
+  "Contact": `
   MiddleText
   `,
-  "Right": `
+  "Async App": `
   RightText
   `,
   "Other Stuff": `

@@ -9,8 +9,8 @@ $("#headerLinks .btn, .dropdown-menu .dropdown-item").click(function(event) {
     `)
 })
 
-$(document).ready(function() {
-  $(".card-body").html(`
-    ${docs['Home']}
-    `)
-})
+// $(document).ready(function() {
+//   $(".card-body").html(`
+//     ${docs['Home']}
+//     `)
+// })
