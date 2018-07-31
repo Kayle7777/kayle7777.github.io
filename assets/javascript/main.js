@@ -4,13 +4,9 @@ $("#headerLinks .btn, .dropdown-menu .dropdown-item").click(function(event) {
   event.preventDefault();
   $("#headerLinks").children().removeClass("active");
   let text = $(this).text();
-  $(".card-body").html(`
-    ${docs[text]}
-    `)
+  $(".card-body").html(docs[text])
 })
 
-// $(document).ready(function() {
-//   $(".card-body").html(`
-//     ${docs['Home']}
-//     `)
-// })
+$(document).ready(function() {
+  $(".card-body").html(docs['Home'])
+})
