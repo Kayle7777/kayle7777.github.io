@@ -49,6 +49,16 @@ const gitHubRepos = [
   }
 ]
 
+$(document).ready(function() {
+  for (var i=0; i<gitHubRepos.length; i++) {
+    let newTabItem = $(`<a class="list-group-item list-group-item-action" id="list-${gitHubRepos[i].gitHubName}-list" data-toggle="list" href="#list-${gitHubRepos[i].gitHubName}" role="tab" aria-controls="${gitHubRepos[i].gitHubName}">${gitHubRepos[i].name}</a>`);
+    let newTabContent = $(`<div class="tab-pane fade" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list">${gitHubRepos[i].description}</div>`);
+    $("#list-tab").append(newTabItem);
+    $("#nav-tabContent").append(newTabContent);
+  }
+  $("#list-tab a:first-of-type").addClass('active');
+  $("#nav-tabContent div:first-of-type").addClass('active show')
+})
 
 async function getReadmes(arg) {
   let promises = [];
@@ -63,13 +73,18 @@ async function getReadmes(arg) {
 }
 
 $(document).ready(async function() {
-  let children = $(".list-group .list-group-item:first-child");
-  let readmeUrls = Array.from(children).map(function(e, i, arr) {
-    return $(e).children()[0].href.replace(/^.*Kayle7777\//, 'https://raw.githubusercontent.com/Kayle7777/').replace(/$/, '/master/README.md');
-  })
-  let readmes = await getReadmes(readmeUrls);
-  console.log(readmes);
-  $(".readme").on("click", function() {
-    console.log("test");
+  let gitHubRepoNames = gitHubRepos.map(e=>e.gitHubName)
+  let readmes = gitHubRepos.map(e=>e.readme);
+  let readmeMD = await getReadmes(readmes);
+  let converter = new showdown.Converter();
+  let readmeHTML = readmeMD.map(e=>converter.makeHtml(e));
+  gitHubRepoNames.map((e, i) => {
+    $(`#list-${e}`).append(
+      `<br><br><br><div class="card">
+        <div class="card-body">
+          ${readmeHTML[i]}
+        </div>
+      </div>`
+    )
   })
 })
