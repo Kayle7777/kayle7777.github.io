@@ -53,8 +53,8 @@ $(document).ready(function() {
   for (var i=0; i<gitHubRepos.length; i++) {
     let newTabItem = $(`<a class="list-group-item list-group-item-action" id="list-${gitHubRepos[i].gitHubName}-list" data-toggle="list" href="#list-${gitHubRepos[i].gitHubName}" role="tab" aria-controls="${gitHubRepos[i].gitHubName}">${gitHubRepos[i].name}</a>`);
     let newTabContent = $(`<div class="tab-pane fade" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list">${gitHubRepos[i].description}</div>`);
-    $("#list-tab").append(newTabItem);
-    $("#nav-tabContent").append(newTabContent);
+    $("#list-tab").prepend(newTabItem);
+    $("#nav-tabContent").prepend(newTabContent);
   }
   $("#list-tab a:first-of-type").addClass('active');
   $("#nav-tabContent div:first-of-type").addClass('active show')
