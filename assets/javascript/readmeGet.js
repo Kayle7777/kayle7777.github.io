@@ -50,11 +50,11 @@ const gitHubRepos = [
 ]
 
 
-async function getReadmes() {
+async function getReadmes(arg) {
   let promises = [];
-  for (var i = 0; i < gitHubRepos.length; i++) {
+  for (var i = 0; i < arg.length; i++) {
     promises.push($.get({
-      url: gitHubRepos[i].readme,
+      url: arg[i],
       dataType: "html"
     }))
   }
@@ -62,34 +62,14 @@ async function getReadmes() {
   return result;
 }
 
-// async function pageBuild() {
-//   let readMes = await getReadmes();
-//   for (var i = 0, r = 0, row = $("<div class='row justify-content-between'>"); i < gitHubRepos.length; i++, r++) {
-//     console.log(gitHubRepos[i].pages);
-//     if (r == 3) {
-//       $("#mainBody").append(row);
-//       row = $("<div class='row justify-content-between'>");
-//       r = 0;
-//     }
-//     row.prepend(`
-//       <div class="col-4">
-//         <div class="card border-0">
-//           <div class="card-header bg-white h5">${gitHubRepos[i].name}</div>
-//           <div class="card-body">
-//             <ul class="list-group list-group-flush">
-//               <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].repo}>Github Repo</a></li>
-//               <li class="list-group-item"><a target="_blank" href=${gitHubRepos[i].pages}>Live Page</a></li>
-//               <li class="list-group-item">${gitHubRepos[i].date}</li>
-//               <li class="list-group-item">${gitHubRepos[i].description}</li>
-//             </ul>
-//           </div>
-//         </div>
-//       </div>
-//     `);
-//     if (i == gitHubRepos.length - 1) {
-//       $("#mainBody").prepend(row);
-//     }
-//   }
-// }
-
-// pageBuild();
+$(document).ready(async function() {
+  let children = $(".list-group .list-group-item:first-child");
+  let readmeUrls = Array.from(children).map(function(e, i, arr) {
+    return $(e).children()[0].href.replace(/^.*Kayle7777\//, 'https://raw.githubusercontent.com/Kayle7777/').replace(/$/, '/master/README.md');
+  })
+  let readmes = await getReadmes(readmeUrls);
+  console.log(readmes);
+  $(".readme").on("click", function() {
+    console.log("test");
+  })
+})
