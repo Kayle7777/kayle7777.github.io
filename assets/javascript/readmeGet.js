@@ -75,8 +75,13 @@ async function getReadmes(arg) {
 $(document).ready(async function() {
   let gitHubRepoNames = gitHubRepos.map(e=>e.gitHubName)
   let readmes = gitHubRepos.map(e=>e.readme);
-  let readmeMD = await getReadmes(readmes);
-  let converter = new showdown.Converter();
+  if (sessionStorage.getItem("JWreadmeMDs") === null) {
+    readmeMD = await getReadmes(readmes);
+    sessionStorage.setItem("JWreadmeMDs", JSON.stringify(readmeMD));
+  } else {
+    let retrievedData = sessionStorage.getItem("JWreadmeMDs");
+    readmeMD = JSON.parse(retrievedData);
+  }  let converter = new showdown.Converter();
   let readmeHTML = readmeMD.map(e=>converter.makeHtml(e));
   gitHubRepoNames.map((e, i) => {
     $(`#list-${e}`).append(
