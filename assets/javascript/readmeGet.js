@@ -51,7 +51,7 @@ const gitHubRepos = [
 
 $(document).ready(function() {
   for (var i=0; i<gitHubRepos.length; i++) {
-    let newTabContent = $(`<div class="tab-pane" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list">${gitHubRepos[i].description}</div>`);
+    let newTabContent = $(`<div class="tab-pane" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list"></div>`);
     $("#nav-tabContent").prepend(newTabContent);
   }
 })
@@ -81,7 +81,7 @@ $(document).ready(async function() {
   let readmeHTML = readmeMD.map(e=>converter.makeHtml(e));
   gitHubRepoNames.map((e, i) => {
     $(`#list-${e}`).append(
-      `<br><br><br><div class="card">
+      `<div class="card">
         <div class="card-body">
           ${readmeHTML[i]}
         </div>
