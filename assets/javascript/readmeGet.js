@@ -91,12 +91,6 @@ $(document).ready(async function() {
 })
 
 $(".list-group-item").click(function(e) {
-  // console.log($(this));
-  buttons = $(this).parent().children();
-  $.map(buttons, function(e) {
-    if($(e).hasClass('list-group-item-animate')) {
-      $(e).removeClass('list-group-item-animate')
-    }
-  })
+  buttons = $(this).parent().children().removeClass('list-group-item-animate');
   $(this).addClass('list-group-item-animate')
 })
