@@ -51,7 +51,7 @@ const gitHubRepos = [
 
 $(document).ready(function() {
   for (var i=0; i<gitHubRepos.length; i++) {
-    let newTabContent = $(`<div class="tab-pane fade" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list">${gitHubRepos[i].description}</div>`);
+    let newTabContent = $(`<div class="tab-pane" id="list-${gitHubRepos[i].gitHubName}" role="tabpanel" aria-labelledby="list-${gitHubRepos[i].gitHubName}-list">${gitHubRepos[i].description}</div>`);
     $("#nav-tabContent").prepend(newTabContent);
   }
 })
@@ -88,4 +88,15 @@ $(document).ready(async function() {
       </div>`
     )
   })
+})
+
+$(".list-group-item").click(function(e) {
+  // console.log($(this));
+  buttons = $(this).parent().children();
+  $.map(buttons, function(e) {
+    if($(e).hasClass('list-group-item-animate')) {
+      $(e).removeClass('list-group-item-animate')
+    }
+  })
+  $(this).addClass('list-group-item-animate')
 })
