@@ -10,10 +10,6 @@
   font-size: 2.3rem;
 }
 
-.active {
-  /* background-color: #44B5F7 !important; */
-}
-
 #div1::before {
   content: "Jesse";
   color:white;
@@ -41,6 +37,23 @@
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+.list-group-item {
+  /* #428bca */
+  margin:1px;
+  background: linear-gradient(to right, #44B5F7 50%, #f9f9f9 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  border: black;
+  transition: all ease 0.4s;
+}
+
+
+
+.list-group-item:focus {
+  border: #44B5F7;
+  background-position: left bottom;
 }
 
 #defaultTab {
