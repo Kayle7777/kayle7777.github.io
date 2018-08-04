@@ -89,6 +89,19 @@ $(document).ready(async function() {
     )
   })
 })
+// 
+// $(document).ready(async function() {
+//   let readme = ``
+//   let converter = new showdown.Converter();
+//   let html = converter.makeHtml(readme);
+//   $("#list-portfolio").append(`
+//     <div class="card">
+//       <div class="card-body">
+//         ${html}
+//       </div>
+//     </div>
+//   `)
+// })
 
 $(".list-group-item").click(function(e) {
   buttons = $(this).parent().children().removeClass('list-group-item-animate');

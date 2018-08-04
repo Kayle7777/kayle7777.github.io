@@ -6,17 +6,21 @@ A page designed to showcase my ever increasing skill at web development / JavaSc
 
 * **Jesse Webb** - *All JavaScript, HTML, CSS* - [Kayle7777](https://github.com/kayle7777)
 
+* ****
+
 ## Notable Concepts / Technologies Used
 
-* **jQuery / ajax** -- For pulling current README markdown files from Github
+* *jQuery / ajax* -- For pulling current README markdown files from Github
 
-* **Async / Await functions**
+* *Async / Await functions*
 
-* **Showdown.js** -- For changing README markdown into HTML, then displaying it on portfolio page
+* *Showdown.js* -- For changing README markdown into HTML, then displaying it on portfolio page
 
-* **CSS Transitions and Animations**
+* *CSS Transitions and Animations*
 
-* **Bootstrap**
+* *Bootstrap*
+
+* ****
 
 ## Links
 
