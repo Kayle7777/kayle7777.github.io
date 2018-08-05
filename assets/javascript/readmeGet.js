@@ -46,6 +46,14 @@ const gitHubRepos = [
     readme: "https://raw.githubusercontent.com/Kayle7777/Project-1-BootCamp-1/master/README.md",
     date: "07/28/2018",
     description: `Now this one was pretty sweet. This is an app which will build you a playlist of a movie's soundtrack on your spotify account. This was especially difficult, because no movie database API has any information on soundtracks -- so I had to scrape IMDb/soundtrack pages for the info. This was neat, I had to learn a bit of RegEx and async / await stuff to get it to work. Very proud of all of this code. While this is technically a group project, let me offer an <a href="https://github.com/Kayle7777/Project-1-BootCamp-1/graphs/contributors">insight</a> into who coded the mass majority of this app.`
+  },
+  { name: 'LIRI Node app',
+    gitHubName: 'liri-node-app',
+    repo: "https://github.com/Kayle7777/liri-node-app",
+    pages: null,
+    readme: "https://raw.githubusercontent.com/Kayle7777/liri-node-app/master/README.md",
+    date: "08/05/2018",
+    description: ``
   }
 ]
 

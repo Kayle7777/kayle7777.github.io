@@ -35,9 +35,6 @@
   overflow-y: scroll;
 }
 
-#nav-tabContent::-webkit-scrollbar {
-  display:none;
-}
 .readme {
   margin-left:20px;
 }
