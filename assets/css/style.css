@@ -1,13 +1,11 @@
+body {
+  background-color: WhiteSmoke;
+}
 
 .header {
   background-color: #44B5F7;
   height: 3.5rem;
   width: 100%;
-}
-
-.headertools::before #test {
-  color:white;
-  font-size: 2.3rem;
 }
 
 #div1::before {
@@ -28,36 +26,4 @@
   font-size:1rem;
   opacity:1;
   font-style:italic;
-}
-
-#nav-tabContent {
-  max-height: 700px;
-  overflow-y: scroll;
-}
-
-#nav-tabContent::-webkit-scrollbar {
-  display:none;
-}
-.readme {
-  margin-left:20px;
-}
-
-.list-group-item {
-  /* #428bca */
-  margin:1px;
-  background: linear-gradient(to right, #44B5F7 50%, #f9f9f9 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  border: 1px black;
-  transition: all ease 0.4s;
-}
-
-.list-group-item-animate {
-  border: #44B5F7;
-  background-position: left bottom;
-}
-
-#defaultTab {
-  animation-duration: 0.2s;
-  animation-name: fadeIn;
 }
