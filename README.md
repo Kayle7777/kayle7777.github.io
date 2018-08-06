@@ -2,6 +2,8 @@
 
 A page designed to showcase my ever increasing skill at web development / JavaScript.
 
+The projects.html portion of this site pulls the live READMEmd files for each of these projects, as it exists on GitHub, and converts their markdown into HTML.
+
 ## Authors
 
 * **Jesse Webb** - *All JavaScript, HTML, CSS* - [Kayle7777](https://github.com/kayle7777)
