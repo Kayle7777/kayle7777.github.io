@@ -79,23 +79,24 @@ async function getReadmes(arg) {
 $(document).ready(async function() {
   let gitHubRepoNames = gitHubRepos.map(e=>e.gitHubName)
   let readmes = gitHubRepos.map(e=>e.readme);
+  let readmeMD;
   if (sessionStorage.getItem("JWreadmeMDs") === null) {
     readmeMD = await getReadmes(readmes);
     sessionStorage.setItem("JWreadmeMDs", JSON.stringify(readmeMD));
   } else {
-    let retrievedData = sessionStorage.getItem("JWreadmeMDs");
-    readmeMD = JSON.parse(retrievedData);
-  }  let converter = new showdown.Converter();
+    readmeMD = JSON.parse(sessionStorage.getItem("JWreadmeMDs"));
+  }
+  let converter = new showdown.Converter();
   let readmeHTML = readmeMD.map(e=>converter.makeHtml(e));
-  gitHubRepoNames.map((e, i) => {
-    $(`#list-${e}`).append(
+  for (var i = 0; i < gitHubRepoNames.length; i++) {
+    $(`#list-${gitHubRepoNames[i]}`).append(
       `<div class="card">
         <div class="card-body">
           ${readmeHTML[i]}
         </div>
       </div>`
     )
-  })
+  }
 })
 
 $(".list-group-item").click(function(e) {

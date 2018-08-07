@@ -7,9 +7,6 @@ $("#headerLinks .btn:not(.dropdown-toggle)").click(function(event) {
   if (text == "Home"){text = "index"};
   window.location=`./${text.toLowerCase()}.html`
 })
-
-$(".dropdown-toggle .dropdown-item").click( e=>e.preventDefault )
-
 // $(document).ready(function() {
 //   $(".card-body").html(docs['Home'])
 // })
