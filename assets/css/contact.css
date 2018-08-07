@@ -1,3 +1,7 @@
 .title {
   font-size: 1.3rem;
 }
+
+.test {
+  overflow-y: scroll;
+}

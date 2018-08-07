@@ -1,5 +1,5 @@
 #nav-tabContent {
-  max-height: 700px;
+  max-height: 100%;
   overflow-y: scroll;
 }
 
@@ -8,7 +8,6 @@
 }
 
 .list-group-item {
-  /* #428bca */
   margin:1px;
   background: linear-gradient(to right, #44B5F7 50%, #f9f9f9 50%);
   background-size: 200% 100%;
@@ -20,9 +19,4 @@
 .list-group-item-animate {
   border: #44B5F7;
   background-position: left bottom;
-}
-
-#defaultTab {
-  animation-duration: 0.2s;
-  animation-name: fadeIn;
 }

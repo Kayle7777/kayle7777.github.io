@@ -8,22 +8,29 @@ body {
   width: 100%;
 }
 
-#div1::before {
+#headerText::before {
   content: "Jesse";
   color:white;
   font-size: 2.3rem;
 }
 
-#div1 {
+#headerText {
   color:lightgrey;
   font-size:2.3rem;
 }
 
-#div1::after {
+#headerText::after {
   content: "Aspiring techy person and stuff";
   padding-left: 10px;
   color:black;
   font-size:1rem;
   opacity:1;
   font-style:italic;
+}
+
+.height-limit {
+  height: 700px;
+}
+.fluid-padding {
+  padding: 0 3% 0 3%
 }

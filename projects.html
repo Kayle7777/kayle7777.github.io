@@ -13,22 +13,22 @@
   <div class="header container-fluid">
     <div class="h-100 container">
       <div class="h-100 d-inline align-items-bottom headertools">
-        <span id="headerName"><div id="div1"> Webb. </div></span>
+        <span id="headerName"><p id="headerText"> Webb. </p></span>
       </div>
     </div>
   </div>
   <div class="container">
     <br>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col">
         <div class="card border-0">
-          <div class="card-header bg-white h3">
+          <div class="card-header border-0 bg-white h3">
             <div class="row">
               <div id="headerLinks" class="btn-group col dropdown justify-content-center" role="group" aria-label="Link bar">
-                <button type="button" id="home" class="col-md-2 btn btn-light" data-toggle="button" aria-pressed="true">Home</button>
-                <button type="button" class="col-md-2 btn btn-light" data-toggle="button" aria-pressed="true">Contact</button>
-                <button type="button" class="col-md-2 btn btn-light active" data-toggle="button" aria-pressed="true">Projects</button>
-                <button type="button" id="links" class="col-md-2 btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Other Stuff</button>
+                <button type="button" id="home" class="col-md btn btn-light" data-toggle="button" aria-pressed="true">Home</button>
+                <button type="button" class="col-md btn btn-light" data-toggle="button" aria-pressed="true">Contact</button>
+                <button type="button" class="col-md btn btn-light active" data-toggle="button" aria-pressed="true">Projects</button>
+                <button type="button" id="links" class="col-md btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Other Stuff</button>
                 <div class="dropdown-menu" aria-labelledby="links">
                   <button class="dropdown-item" type="button">Action</button>
                   <button class="dropdown-item" type="button">Action</button>
@@ -37,8 +37,17 @@
               </div>
             </div>
           </div>
-          <div id="mainBody" class="card-body container">
-            <div class="row">
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="container-fluid fluid-padding">
+    <div class="row">
+      <div class="col">
+        <div class="card border-0">
+          <div id="mainBody" class="card-body">
+            <div class="row height-limit">
               <div class="col-4">
                 <div class="list-group" id="list-tab" role="tablist">
                   <a class="list-group-item list-group-item-action list-group-item-animate active" id="list-portfolio-list" data-toggle="list" href="#list-portfolio" role="tab" aria-controls="portfolio" aria-selected="true">Portfolio</a>
@@ -87,6 +96,7 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
