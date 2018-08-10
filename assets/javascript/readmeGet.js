@@ -90,8 +90,8 @@ $(document).ready(async function() {
   let readmeHTML = readmeMD.map(e=>converter.makeHtml(e));
   for (var i = 0; i < gitHubRepoNames.length; i++) {
     $(`#list-${gitHubRepoNames[i]}`).append(
-      `<div class="card">
-        <div class="card-body">
+      `<div class="card border border-rounded border-secondary">
+        <div class="card-body bg-secondary text-light">
           ${readmeHTML[i]}
         </div>
       </div>`

@@ -9,14 +9,23 @@
 
 .list-group-item {
   margin:1px;
-  background: linear-gradient(to right, #44B5F7 50%, #f9f9f9 50%);
+  background: linear-gradient(to right, #44B5F7 50%, #636c72 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   border: 1px black;
   transition: all ease 0.4s;
+  color:WhiteSmoke;
+}
+
+.list-group-item:hover {
+  color:WhiteSmoke;
 }
 
 .list-group-item-animate {
   border: #44B5F7;
   background-position: left bottom;
 }
+
+/* .tab-pane {
+  color:
+} */
