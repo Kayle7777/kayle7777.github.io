@@ -2,6 +2,11 @@ body {
   background-color: #2C2F33;
 }
 
+#nav-tabContent a {
+  color: LightBlue;
+  text-decoration: underline;
+}
+
 .bg-d-dark {
   background-color: #2C2F33!important;
 }
