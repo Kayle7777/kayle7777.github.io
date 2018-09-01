@@ -99,14 +99,14 @@ $(document).ready(function() {
 });
 
 async function getReadmes(arg) {
-    let promises = arg.map(e=>{
+    const promises = arg.map(e=>{
         return $.get({
             url: e,
             dataType: "html"
-        })
+        });
     });
     return await Promise.all(promises);
-}
+};
 
 $(document).ready(async function() {
     const converter = new showdown.Converter();
@@ -129,10 +129,10 @@ $(document).ready(async function() {
             </div>
             </div>`
         )
-    })
-})
+    });
+});
 
 $(".list-group-item").click(function() {
     buttons = $(this).parent().children().removeClass('list-group-item-animate');
-    $(this).addClass('list-group-item-animate')
-})
+    $(this).addClass('list-group-item-animate');
+});
