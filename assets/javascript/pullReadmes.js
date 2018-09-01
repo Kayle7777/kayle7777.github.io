@@ -12,6 +12,7 @@ const pullReadmes = async (keyLoc, db,arg) => {
             const stringData = sqlDataString.split("\t");
             const newObj = {}
             for (let i = 0; i < stringData.length; i++) {
+                stringData[i] === 'NULL'?stringData[i] = null:null;
                 newObj[sqlColumnNames[i]] = stringData[i];
             };
             accu.push(newObj);
@@ -21,5 +22,7 @@ const pullReadmes = async (keyLoc, db,arg) => {
     ssh.dispose();
     return readmeMySQLDataArr;
 };
+
+// example: pullReadmes("C:/users/Jesse/.ssh/id_rsa", "github_db", "select * from readmes").then(e=>console.log(e));
 
 module.exports = pullReadmes;
