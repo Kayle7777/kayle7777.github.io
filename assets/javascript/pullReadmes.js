@@ -2,8 +2,8 @@ const sqlobj = require("./sqlobj.js");
 const node_ssh = require("node-ssh");
 const ssh = new node_ssh();
 
-const pullReadmes = async (db,arg) => {
-    const connection = await ssh.connect(sqlobj.sshObj());
+const pullReadmes = async (keyLoc, db,arg) => {
+    const connection = await ssh.connect(sqlobj.sshObj(keyLoc));
     const data = await ssh.execCommand(sqlobj.sshQuery(db, arg));
     const stringSplitArr = data.stdout.split("\n");
     const sqlColumnNames = stringSplitArr[0].split("\t");
@@ -21,7 +21,5 @@ const pullReadmes = async (db,arg) => {
     ssh.dispose();
     return readmeMySQLDataArr;
 };
-
-pullReadmes('github_db', 'select * from readmes').then(e=>console.log(e));
 
 module.exports = pullReadmes;
