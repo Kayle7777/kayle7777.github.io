@@ -5,13 +5,6 @@ const mysql = require("mysql2/promise");
 const ssh = require("ssh2").Client;
 const conn = new ssh();
 
-const connInfo = {
-    host: "173.174.69.53",
-    port: 22,
-    username: "jesse",
-    privateKey: require("fs").readFileSync("C:\\Users\\Jesse\\.ssh\\id_rsa")
-}
-
 conn.on('ready', function() {
   console.log('Client :: ready');
   conn.exec(sqlobj.sshQuery('github_db', 'SELECT * FROM readmes'), (err, stream) => {
@@ -37,4 +30,4 @@ conn.on('ready', function() {
       console.log('STDERR: ' + data);
     });
   });
-}).connect(connInfo);
+}).connect(sqlobj.sqlobj());
