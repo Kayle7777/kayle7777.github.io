@@ -9,4 +9,11 @@
     }
 };
 
- module.exports = sqlobj;
+const sshQuery = (db, arg) => {
+    return `mysql --database='${db}' --user="remote" -B --password="password" --execute='${arg}'`
+}
+
+ module.exports = {
+    sqlobj: sqlobj,
+    sshQuery: sshQuery
+ };

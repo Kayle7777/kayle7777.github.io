@@ -14,7 +14,7 @@ const connInfo = {
 
 conn.on('ready', function() {
   console.log('Client :: ready');
-  conn.exec('mysql --database=github_db --user="remote" -B --password="password" --execute="SELECT * FROM readmes"', (err, stream) => {
+  conn.exec(sqlobj.sshQuery('github_db', 'SELECT * FROM readmes'), (err, stream) => {
     if (err) throw err;
     stream.on('close', (code, signal) => {
       conn.end();
@@ -23,7 +23,6 @@ conn.on('ready', function() {
       const sqlColumnNames = decodedBufferData[0].split("\t");
       const newArr = decodedBufferData.reduce((accu,sqlDataString,i)=>{
           if (i>0) {
-              // console.log(sqlColumnNames)
               const stringSplitArr = sqlDataString.split("\t");
               const newObj = {}
               for (var i = 0; i < stringSplitArr.length; i++) {
@@ -34,7 +33,6 @@ conn.on('ready', function() {
           return accu;
       },[]);
       console.log(newArr);
-      // console.log('STDIN: ' + data);
   }).stderr.on('data', (data) => {
       console.log('STDERR: ' + data);
     });
