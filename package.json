@@ -1,0 +1,25 @@
+{
+  "name": "new-portfolio",
+  "version": "1.0.0",
+  "description": "A page designed to showcase my ever increasing skill at web development / JavaScript.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kayle7777/kayle7777.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kayle7777/kayle7777.github.io/issues"
+  },
+  "homepage": "https://github.com/Kayle7777/kayle7777.github.io#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "node-ssh": "^5.1.2"
+  }
+}
