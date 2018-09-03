@@ -24,7 +24,6 @@ $(document).ready(async function() {
     } else {
         readmeMD = JSON.parse(sessionStorage.getItem("JWreadmeMDs"));
     };
-
     const readmeHTML = readmeMD.map(mrkdwnValue=>converter.makeHtml(mrkdwnValue));
     gitHubRepoNames.forEach((e,i)=>{
         $(`#list-${e}`).append(
@@ -38,6 +37,6 @@ $(document).ready(async function() {
 });
 
 $(".list-group-item").click(function() {
-    buttons = $(this).parent().children().removeClass('list-group-item-animate');
+    $(this).parent().children().removeClass('list-group-item-animate');
     $(this).addClass('list-group-item-animate');
 });

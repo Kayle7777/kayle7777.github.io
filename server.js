@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const pullReadmes = require("./assets/javascript/pullReadmes.js");
+const pullReadmes = require("./assets/javascript/mysqlPullReadmes.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ class Readme {
         this.readmes = [];
     };
     static async readmeGetter() {
-        return pullReadmes("C:/users/Jesse/.ssh/id_rsa", "github_db", "select * from readmes");
+        return mysqlPullReadmes("C:/users/Jesse/.ssh/id_rsa", "github_db", "select * from readmes");
     };
 };
 const currentReadmes = new Readme();
@@ -37,7 +37,7 @@ app.get('/contact', (req,res)=>{
 app.get('/api/readmes', async (req,res)=>{
     try {
         currentReadmes.readmes = await Readme.readmeGetter();
-        return res.json(currentReadmes.readmes);
+        return res.json(currentReadmes.readmes.query[0]);
     } catch (err) {
         console.err(new Error(err));
     }
