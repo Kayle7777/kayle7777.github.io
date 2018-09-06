@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
-const pullReadmes = require("./assets/javascript/mysqlPullReadmes.js");
+const sqlTrans = require("./assets/javascript/sqltrans.js");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,7 +16,7 @@ class Readme {
         this.readmes = [];
     };
     static async readmeGetter() {
-        return mysqlPullReadmes("C:/users/Jesse/.ssh/id_rsa", "github_db", "select * from readmes");
+        return sqlTrans("github_db", "SELECT * FROM readmes");
     };
 };
 const currentReadmes = new Readme();
@@ -42,5 +42,6 @@ app.get('/api/readmes', async (req,res)=>{
         console.err(new Error(err));
     }
 });
-
-app.listen(PORT);
+app.listen(PORT, '0.0.0.0', function() {
+    console.log('Listening to port:  ' + PORT);
+});
