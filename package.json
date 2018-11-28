@@ -1,27 +1,25 @@
 {
-    "name": "mern",
-    "version": "1.0.0",
-    "description": "",
-    "main": "server.js",
-    "scripts": {
-        "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-        "start:prod": "node server.js",
-        "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
-        "client": "cd client && npm run start",
-        "seed": "node scripts/seedDB.js",
-        "install": "cd client && yarn install",
-        "build": "cd client && npm run build",
-        "heroku-postbuild": "npm run build"
-    },
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "concurrently": "^3.5.0",
-        "nodemon": "^1.11.0"
-    },
-    "dependencies": {
-        "axios": "^0.16.2",
-        "express": "^4.16.3",
-        "if-env": "^1.0.4"
-    }
+  "name": "kayle7777-github-io",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
