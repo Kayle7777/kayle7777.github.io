@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default {
-    // Gets all things
+    // Gets all things from database
     getStuff: function() {
         return axios.get('/api/example');
     },
