@@ -1,10 +1,21 @@
 import React from 'react';
-// import Books from "./pages/Books";
-// import Detail from "./pages/Detail";
-// import NoMatch from "./pages/NoMatch";
-// import Nav from "./components/Nav";
+import Main from './pages/Main';
+import Nav from './components/Nav';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 
-const App = () => <div>{/* <Nav />
-        <Books /> */}</div>;
+const theme = createMuiTheme({
+    pallete: {
+        type: 'dark',
+    },
+});
+
+const App = () => (
+    <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Nav />
+        {/* <Route exact path="/" component={Main} /> */}
+    </MuiThemeProvider>
+);
 
 export default App;

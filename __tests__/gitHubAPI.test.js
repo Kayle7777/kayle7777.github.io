@@ -1,6 +1,6 @@
 const gitHubGet = require('../controllers/gitHubGet');
 
-test('should show me what this returns', async () => {
+test('getAllRepoData worked', async () => {
     let data = await gitHubGet.getAllRepoData();
-    console.log(data);
+    expect(data.repos.length).toBeGreaterThan(5);
 });
