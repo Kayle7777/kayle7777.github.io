@@ -3,7 +3,7 @@ const axios = require('axios');
 const jw = 'https://api.github.com/users/kayle7777';
 
 module.exports = {
-    getAllRepoData: async () => {
+    getAllRepoData: async (req, res) => {
         try {
             let data = await axios.get(`${jw}/repos?sort=updated`);
             const owner = data.data[0].owner;
@@ -17,12 +17,12 @@ module.exports = {
                     description: gitObj.description,
                 };
             });
-            return {
+            res.send({
                 owner: owner,
                 repos: data,
-            };
+            });
         } catch (err) {
-            console.error(err);
+            res.send(err);
         }
     },
 };

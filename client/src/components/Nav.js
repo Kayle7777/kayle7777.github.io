@@ -8,18 +8,18 @@ const styles = {
     },
 };
 
-function SimpleAppBar(props) {
+function Nav(props) {
     const { classes } = props;
 
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h6">Photos</Typography>
+                    <Typography variant="h6">Nav</Typography>
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
 
-export default withStyles(styles)(SimpleAppBar);
+export default withStyles(styles)(Nav);

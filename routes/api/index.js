@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const exampleRoutes = require('./example');
+const gitHubRoutes = require('./gitHubAPI');
 
-// Book routes
-router.use('/example', exampleRoutes);
+// api routes
+// /api/gitHub/
+router.use('/gitHub', gitHubRoutes);
 
 module.exports = router;
