@@ -2,6 +2,17 @@ const axios = require('axios');
 
 const jw = 'https://api.github.com/users/kayle7777';
 
+let tryReadme = async url => {
+    try {
+        url = url.replace(/^.*(Kayle7777.*)/, (_m, g) => g);
+        url = `https://raw.githubusercontent.com/${url}/master/README.md`;
+        let data = await axios.get(url);
+        return url;
+    } catch (err) {
+        return null;
+    }
+};
+
 module.exports = {
     getAllRepoData: async (req, res) => {
         try {
@@ -17,6 +28,10 @@ module.exports = {
                     description: gitObj.description,
                 };
             });
+            for (let i in data) {
+                let res = await tryReadme(data[i].url);
+                data[i]['readme'] = res;
+            }
             res.send({
                 owner: owner,
                 repos: data,
