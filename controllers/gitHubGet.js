@@ -32,7 +32,7 @@ module.exports = {
                 let res = await tryReadme(data[i].url);
                 data[i]['readme'] = res;
             }
-            res.send({
+            res.json({
                 owner: owner,
                 repos: data,
             });

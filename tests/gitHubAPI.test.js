@@ -1,6 +1,13 @@
-const gitHubGet = require('../controllers/gitHubGet');
+const request = require('supertest');
+const server = require('../serverTest');
 
-test('getAllRepoData worked', async () => {
-    let data = await gitHubGet.getAllRepoData();
-    expect(data.repos.length).toBeGreaterThan(5);
+test('all repos have readmes', done => {
+    request(server)
+        .get('/api/gitHub/')
+        .expect(200)
+        .end((err, res) => {
+            if (err) done(err);
+            console.log(res.body);
+            done();
+        });
 });
