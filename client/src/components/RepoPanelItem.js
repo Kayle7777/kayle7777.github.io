@@ -32,10 +32,11 @@ const RepoPanelItem = props => {
             selectRepo(null);
         } else selectRepo(index);
     };
+    const { name, description, readme, readme_url, url, createdAt, updatedAt } = repoData;
     return (
         // expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}
         <ListItem button onClick={() => clickFunction(index)}>
-            <ListItemText primary="Inbox" />
+            <ListItemText primary={repoData.name.slice(0, 12) + '...'} />
             <ListItemIcon>
                 <PlayArrow className={selectedRepo === index ? classes.iconShift : classes.icon} />
             </ListItemIcon>
@@ -44,3 +45,14 @@ const RepoPanelItem = props => {
 };
 
 export default withStyles(styles, { withTheme: true })(RepoPanelItem);
+
+// { Sample repoData
+// createdAt: "2018-07-07T17:47:17Z"
+// description: null
+// id: 140105585
+// name: "nytClassProject"
+// readme: null
+// readme_url: null
+// updatedAt: "2018-07-07T18:24:10Z"
+// url: "https://github.com/Kayle7777/nytClassProject"
+// }

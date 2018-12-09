@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
-import { Typography, Grid } from '@material-ui/core';
+import { List, Typography, Grid } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
 import axios from 'axios';
+import Frame from '../components/Frame';
 
-const Main = () => {
+const styles = theme => ({
+    toolbar: theme.mixins.toolbar,
+});
+
+const Main = props => {
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
     const [selectedRepo, selectRepo] = useState(null);
 
@@ -19,26 +24,28 @@ const Main = () => {
     }, []);
 
     return (
-        <Grid container>
-            <Grid item md={4}>
-                {!gitData
-                    ? 'Loading...'
-                    : gitData.repos.map((repoData, index) => {
-                          return (
-                              <RepoPanelItem
-                                  selectedRepo={selectedRepo}
-                                  selectRepo={selectRepo}
-                                  repoData={repoData}
-                                  index={index}
-                              />
-                          );
-                      })}
+        <>
+            <Frame>
+                <List className={props.classes.toolbar}>
+                    {gitData.repos.map((repoData, index) => {
+                        return (
+                            <RepoPanelItem
+                                selectedRepo={selectedRepo}
+                                selectRepo={selectRepo}
+                                repoData={repoData}
+                                index={index}
+                                key={repoData.id}
+                            />
+                        );
+                    })}
+                </List>
+            </Frame>
+            <Grid container>
+                <Grid item md={2} />
+                <Grid item>placeholder</Grid>
             </Grid>
-            <Grid item md={8}>
-                placeholder
-            </Grid>
-        </Grid>
+        </>
     );
 };
 
-export default withStyles({}, { withTheme: true })(Main);
+export default withStyles(styles, { withTheme: true })(Main);
