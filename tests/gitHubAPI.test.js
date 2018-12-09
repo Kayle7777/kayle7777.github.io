@@ -12,5 +12,5 @@ test('enough repos have valid README files', async () => {
         if (!x.readme_url) failCount++;
     }
     expect(gotData.body.repos.length).toBeGreaterThan(1);
-    expect(failCount).toBeLessThan(5);
+    expect(failCount).toBeLessThan(15);
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withStyles, withTheme } from '@material-ui/core/styles';
 import { Typography, Grid } from '@material-ui/core';
-import RepoPanel from '../components/RepoPanel';
+import RepoPanelItem from '../components/RepoPanelItem';
 import axios from 'axios';
 
 const Main = () => {
@@ -25,7 +25,7 @@ const Main = () => {
                     ? 'Loading...'
                     : gitData.repos.map((repoData, index) => {
                           return (
-                              <RepoPanel
+                              <RepoPanelItem
                                   selectedRepo={selectedRepo}
                                   selectRepo={selectRepo}
                                   repoData={repoData}
