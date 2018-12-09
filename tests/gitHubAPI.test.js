@@ -2,13 +2,14 @@ const request = require('supertest');
 const server = require('../serverTest');
 
 jest.setTimeout(30000);
-test('all repos have readmes', done => {
-    request(server)
+
+test('enough repos have valid README files', async () => {
+    let gotData = await request(server)
         .get('/api/gitHub/')
-        .expect(200)
-        .end((err, res) => {
-            if (err) done(err);
-            console.log(res.body);
-            done();
-        });
+        .expect(200);
+    let failCount = 0;
+    for (let x of gotData.body.repos) {
+        if (!x.readme) failCount++;
+    }
+    expect(failCount).toBeLessThan(5);
 });
