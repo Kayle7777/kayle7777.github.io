@@ -37,6 +37,7 @@ module.exports = {
                 owner: owner,
                 repos: data,
             });
+            console.log(`Sent data, including owner info and ${data.length} code repo information packets.`);
         } catch (err) {
             res.send(err);
         }
