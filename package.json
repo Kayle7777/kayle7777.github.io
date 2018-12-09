@@ -16,7 +16,7 @@
         "build": "cd client && npm run build",
         "heroku-postbuild": "npm run build",
         "rtest": "cd client && yarn test",
-        "apitest": "jest ./tests"
+        "apitest": "set NODE_ENV=test&& jest ./tests"
     },
     "author": "",
     "license": "ISC",

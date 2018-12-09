@@ -1,5 +1,5 @@
 const request = require('supertest');
-const server = require('../serverTest');
+const server = require('../server');
 
 jest.setTimeout(30000);
 
@@ -11,5 +11,6 @@ test('enough repos have valid README files', async () => {
     for (let x of gotData.body.repos) {
         if (!x.readme_url) failCount++;
     }
+    expect(gotData.body.repos.length).toBeGreaterThan(1);
     expect(failCount).toBeLessThan(5);
 });
