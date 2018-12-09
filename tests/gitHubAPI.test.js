@@ -9,7 +9,7 @@ test('enough repos have valid README files', async () => {
         .expect(200);
     let failCount = 0;
     for (let x of gotData.body.repos) {
-        if (!x.readme) failCount++;
+        if (!x.readme_url) failCount++;
     }
     expect(failCount).toBeLessThan(5);
 });

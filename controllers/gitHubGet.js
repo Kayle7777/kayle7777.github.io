@@ -7,9 +7,9 @@ let tryReadme = async url => {
         url = url.replace(/^.*(Kayle7777.*)/, (_m, g) => g);
         url = `https://raw.githubusercontent.com/${url}/master/README.md`;
         let data = await axios.get(url);
-        return url;
+        return { url: url, data: data.data };
     } catch (err) {
-        return null;
+        return { url: null, data: null };
     }
 };
 
@@ -30,7 +30,8 @@ module.exports = {
             });
             for (let i in data) {
                 let res = await tryReadme(data[i].url);
-                data[i]['readme'] = res;
+                data[i]['readme_url'] = res.url;
+                data[i]['readme'] = res.data;
             }
             res.json({
                 owner: owner,
