@@ -21,7 +21,7 @@ const Main = props => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, gitData);
 
     return (
         <>
