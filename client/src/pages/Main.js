@@ -13,7 +13,11 @@ const Main = () => {
     useEffect(() => {
         fetchData();
     }, []);
-    return <div>placeholder</div>;
+    return (
+        <>
+            <div>placeholder</div>
+        </>
+    );
 };
 
 export default Main;
