@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const Main = () => {
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
-    const [selectedRepo, selectRepo] = useState(0);
+    const [selectedRepo, selectRepo] = useState(null);
 
     const fetchData = async () => {
         const url = 'http://localhost:3001';
@@ -23,8 +23,15 @@ const Main = () => {
             <Grid item md={4}>
                 {!gitData
                     ? 'Loading...'
-                    : [0, 1, 2, 3, 4].map(e => {
-                          return <RepoPanel />;
+                    : gitData.repos.map((repoData, index) => {
+                          return (
+                              <RepoPanel
+                                  selectedRepo={selectedRepo}
+                                  selectRepo={selectRepo}
+                                  repoData={repoData}
+                                  index={index}
+                              />
+                          );
                       })}
             </Grid>
             <Grid item md={8}>
