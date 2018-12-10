@@ -15,7 +15,9 @@ const Main = props => {
 
     const fetchData = async () => {
         const url = 'http://localhost:3001';
-        const result = await axios(`${url}/api/gitHub/`);
+        const result = await axios.get(`${url}/api/gitHub/`);
+        // const test = await axios.post(`${url}/api/gitHub/graphql`);
+        // console.log(test);
         setRepos(result.data);
     };
 

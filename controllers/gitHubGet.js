@@ -26,6 +26,7 @@ module.exports = {
                     createdAt: gitObj.created_at,
                     updatedAt: gitObj.updated_at,
                     description: gitObj.description,
+                    topics: gitObj.topics,
                 };
             });
             for (let i in data) {
@@ -40,6 +41,40 @@ module.exports = {
             console.log(`Sent data, including owner info and ${data.length} code repo information packets.`);
         } catch (err) {
             res.send(err);
+        }
+    },
+    graphQLgitData: async (req, res) => {
+        const axiosGitHubGraphQL = axios.create({
+            baseURL: 'https://api.github.com/graphql',
+            headers: {
+                Authorization: `bearer ${process.env.GITHUB_API_TOKEN}`,
+            },
+        });
+        try {
+            const result = await axiosGitHubGraphQL({
+                url: '',
+                method: 'post',
+                data: {
+                    query: `
+                query {
+                viewer {
+                  repositories(last:30,affiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]) {
+                    edges {
+                      node {
+                        name
+                        owner {
+                          login
+                        }
+                      }
+                    }
+                  }
+                }
+              }`,
+                },
+            });
+            res.send(result.data);
+        } catch (err) {
+            throw err;
         }
     },
 };

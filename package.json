@@ -29,6 +29,7 @@
         "axios": "^0.16.2",
         "body-parser": "^1.18.3",
         "cors": "^2.8.5",
+        "dotenv": "^6.2.0",
         "express": "^4.16.3",
         "if-env": "^1.0.4",
         "supertest": "^3.3.0"
