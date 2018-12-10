@@ -66,35 +66,18 @@ module.exports = {
                                     description
                                     id
                                     url
+                                    readme: object(expression: "master:README.md") {
+                                        ... on Blob {
+                                            text
+                                        }
+                                    }
                                 }
                             }
                         }
                     }`,
                 },
             });
-            // console.log(result.data.data.viewer.repositories.nodes);
-            let readmeData = result.data.data.viewer.repositories.nodes.map(eachrepo => {
-                return axios({
-                    url: `https://api.github.com/repos/${eachrepo.url.replace(/^.*\.com\//, '')}/readme`,
-                    method: 'get',
-                    headers: {
-                        Authorization: `bearer ${process.env.GITHUB_API_TOKEN}`,
-                    },
-                }).catch(e => (e = null));
-            });
-            readmeData = await Promise.all(readmeData);
-            readmeData = readmeData.map(e => {
-                if (e !== null) {
-                    const { download_url, url, html_url, content } = e.data;
-                    return {
-                        download_url,
-                        url,
-                        html_url,
-                        content,
-                    };
-                } else return e;
-            });
-            res.send({ graphqlData: result.data, readmeData: readmeData });
+            res.send(result.data);
         } catch (err) {
             throw err;
         }
