@@ -16,19 +16,19 @@ export default {
                 data: {
                     query: `
                 query {
-                viewer {
-                  repositories(last:30,affiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]) {
-                    edges {
-                      node {
-                        name
-                        owner {
-                          login
+                    viewer {
+                    repositories(last:30,affiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]) {
+                        edges {
+                        node {
+                            name
+                            owner {
+                            login
+                            }
                         }
-                      }
+                        }
                     }
-                  }
-                }
-              }`,
+                    }
+                }`,
                 },
             });
             console.log(result);

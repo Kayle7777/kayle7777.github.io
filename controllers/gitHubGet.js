@@ -55,21 +55,22 @@ module.exports = {
                 url: '',
                 method: 'post',
                 data: {
-                    query: `
-                query {
-                viewer {
-                  repositories(last:30,affiliations:[OWNER,COLLABORATOR,ORGANIZATION_MEMBER]) {
-                    edges {
-                      node {
-                        name
-                        owner {
-                          login
+                    query: `{
+                        viewer {
+                            name
+                            repositories(last: 30) {
+                                nodes {
+                                    name
+                                    createdAt
+                                    updatedAt
+                                    pushedAt
+                                    description
+                                    id
+                                    url
+                                }
+                            }
                         }
-                      }
-                    }
-                  }
-                }
-              }`,
+                    }`,
                 },
             });
             res.send(result.data);
