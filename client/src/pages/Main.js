@@ -15,10 +15,9 @@ const Main = props => {
 
     const fetchData = async () => {
         const url = 'http://localhost:3001';
-        const result = await axios.get(`${url}/api/gitHub/`);
-        // const test = await axios.post(`${url}/api/gitHub/graphql`);
-        // console.log(test);
-        setRepos(result.data);
+        const result = await axios.post(`${url}/api/gitHub/graphql`);
+        console.log(result);
+        setRepos({ owner: result.data.data.viewer, repos: result.data.data.viewer.repositories.nodes });
     };
 
     useEffect(() => {
