@@ -2,11 +2,10 @@ const axios = require('axios');
 
 const jw = 'https://api.github.com/users/kayle7777';
 
-let tryReadme = async url => {
+const readme = url => `https://raw.githubusercontent.com/${url.replace(/^.*\.com\//, '')}/master/README.md`;
+const tryReadme = async url => {
     try {
-        url = url.replace(/^.*(Kayle7777.*)/, (_m, g) => g);
-        url = `https://raw.githubusercontent.com/${url}/master/README.md`;
-        let data = await axios.get(url);
+        let data = await axios.get(readme(url));
         return { url: url, data: data.data };
     } catch (err) {
         return { url: null, data: null };
@@ -73,7 +72,29 @@ module.exports = {
                     }`,
                 },
             });
-            res.send(result.data);
+            // console.log(result.data.data.viewer.repositories.nodes);
+            let readmeData = result.data.data.viewer.repositories.nodes.map(eachrepo => {
+                return axios({
+                    url: `https://api.github.com/repos/${eachrepo.url.replace(/^.*\.com\//, '')}/readme`,
+                    method: 'get',
+                    headers: {
+                        Authorization: `bearer ${process.env.GITHUB_API_TOKEN}`,
+                    },
+                }).catch(e => (e = null));
+            });
+            readmeData = await Promise.all(readmeData);
+            readmeData = readmeData.map(e => {
+                if (e !== null) {
+                    const { download_url, url, html_url, content } = e.data;
+                    return {
+                        download_url,
+                        url,
+                        html_url,
+                        content,
+                    };
+                } else return e;
+            });
+            res.send({ graphqlData: result.data, readmeData: readmeData });
         } catch (err) {
             throw err;
         }
