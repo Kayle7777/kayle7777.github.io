@@ -30,10 +30,10 @@ module.exports = {
                     topics: gitObj.topics,
                 };
             });
+            let readmes = await Promise.all(data.map(e => tryReadme(e.url)));
             for (let i in data) {
-                let res = await tryReadme(data[i].url);
-                data[i]['readme_url'] = res.url;
-                data[i]['readme'] = res.data;
+                data[i]['readme_url'] = readmes[i].url;
+                data[i]['readme'] = readmes[i].data;
             }
             res.json({
                 owner: owner,
