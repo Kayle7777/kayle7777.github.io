@@ -13,6 +13,8 @@ const tryReadme = async url => {
 };
 
 module.exports = {
+    // old github v3 API
+    // when express hits /api/gitHub/
     getAllRepoData: async (req, res) => {
         try {
             let data = await axios.get(`${jw}/repos?sort=updated`);
@@ -42,6 +44,8 @@ module.exports = {
             res.send(err);
         }
     },
+    // new github v4 API, using graphQL
+    // when express hits /api/gitHub/graphql
     graphQLgitData: async (req, res) => {
         const axiosGitHubGraphQL = axios.create({
             baseURL: 'https://api.github.com/graphql',
@@ -54,6 +58,7 @@ module.exports = {
                 url: '',
                 method: 'post',
                 data: {
+                    // This really should be in a separate .gql file
                     query: `{
                         viewer {
                             name
@@ -79,7 +84,7 @@ module.exports = {
             });
             res.send(result.data);
         } catch (err) {
-            throw err;
+            console.log(`Man, you still don't get it!!\n\n${err}`);
         }
     },
 };
