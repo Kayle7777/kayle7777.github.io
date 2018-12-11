@@ -49,7 +49,7 @@ export default {
         const axiosGitHubGraphQL = axios.create({
             baseURL: 'https://api.github.com/graphql',
             headers: {
-                Authorization: `bearer ${process.env.GITHUB_API_TOKEN}`,
+                Authorization: `bearer ${process.env.REACT_APP_GITHUB_API_TOKEN}`,
             },
         });
         try {
