@@ -2,21 +2,6 @@ import API from '../utils/gitHubGet';
 const { graphql, repoSchema, ownerSchema, pinnedRepoSchema } = API;
 jest.setTimeout(30000);
 
-test('github v3 standard API repos', async () => {
-    try {
-        let gotData = await API.getAllRepoData();
-        let failCount = 0;
-        gotData = gotData.repos;
-        for (let x of gotData) {
-            if (!x.readme_url) failCount++;
-        }
-        expect(gotData.length).toBeGreaterThan(1);
-        expect(failCount).toBeLessThan(15);
-    } catch (err) {
-        throw err;
-    }
-});
-
 test('github v4 graphql API repos', async () => {
     try {
         let gotData = await graphql(repoSchema);

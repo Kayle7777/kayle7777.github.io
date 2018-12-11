@@ -11,37 +11,6 @@ const tryReadme = async url => {
 };
 
 export default {
-    // old github v3 API
-    // when express hits /api/gitHub/
-    getAllRepoData: async (req, res) => {
-        try {
-            const jw = 'https://api.github.com/users/kayle7777';
-            let data = await axios.get(`${jw}/repos?sort=updated`);
-            const owner = data.data[0].owner;
-            data = data.data.map(gitObj => {
-                return {
-                    id: gitObj.id,
-                    name: gitObj.name,
-                    url: gitObj.html_url,
-                    createdAt: gitObj.created_at,
-                    updatedAt: gitObj.updated_at,
-                    description: gitObj.description,
-                    topics: gitObj.topics,
-                };
-            });
-            let readmes = await Promise.all(data.map(e => tryReadme(e.url)));
-            for (let i in data) {
-                data[i]['readme_url'] = readmes[i].url;
-                data[i]['readme'] = readmes[i].data;
-            }
-            return {
-                owner: owner,
-                repos: data,
-            };
-        } catch (err) {
-            return err;
-        }
-    },
     // new github v4 API, using graphQL
     // when express hits /api/gitHub/graphql
     graphql: async schema => {
