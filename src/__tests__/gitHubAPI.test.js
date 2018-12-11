@@ -21,7 +21,8 @@ test('github v4 graphql API repos', async () => {
         let gotData = await gitHubAPI.graphQLgitData();
         let failCount = 0;
         for (let x of gotData.data.viewer.repositories.nodes) {
-            if (!x.readme) failCount++;
+            if (!x.read
+                me) failCount++;
         }
         expect(failCount).toBeLessThan(15);
     } catch (err) {
