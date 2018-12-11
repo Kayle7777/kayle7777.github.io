@@ -1,10 +1,10 @@
-import gitHubAPI from '../utils/gitHubGet';
-const { graphql, repoSchema, ownerSchema, pinnedRepoSchema } = gitHubAPI;
+import API from '../utils/gitHubGet';
+const { graphql, repoSchema, ownerSchema, pinnedRepoSchema } = API;
 jest.setTimeout(30000);
 
 test('github v3 standard API repos', async () => {
     try {
-        let gotData = await gitHubAPI.getAllRepoData();
+        let gotData = await API.getAllRepoData();
         let failCount = 0;
         gotData = gotData.repos;
         for (let x of gotData) {
