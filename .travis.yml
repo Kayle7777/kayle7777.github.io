@@ -1,9 +1,9 @@
 language: node_js
 node_js:
-- node
+    - '10.8.0'
 cache:
-  directories:
-  - node_modules
+    directories:
+        - node_modules
 env:
-  global:
-    secure: vks+QPJonJUx+c53A9/YFCwsq6hJP7OOtp6xVk0gi4rv78+/Wvyw0U27/HCoUnfsnH83/VKFC+6fi4R4n9h34aeN9lgAeKlYeiA3M/UwnQ7qeFFg/cGz/XCEr306SGERvcku8HCSfqriyT6HqXVCudkqZV3+dRPg7TH3ysLfOo01lDCC1SatDnl81H6yAGRO6uWa/rOl6q4bBHtleNw8tUIsrk2uQOGY7NdB4o0cY0HajtetUU+BCt70HAG4AcDBW5F2k2i4B4ppKfWcxgbiSNcd6aWeXU9kxpsOK3+JCUbvuTcXj/yQAxC/STcjkebod4E8K7p7wkM9YVBBYtQzY1UZalEY5ZClt/BGRT71S/abyUhJ9zjVjgGvkMHag+VPmH/23/xcilTa3H0O+ujXlaECAmGnOqAeUleeAH2K4hEKV5pG706pjDU+c/3cEja4e6kLhlLrGpkud9g7dhW377s2R3ikqifflNaUXEy/Ygzx6T3f655c4xxcCfJ/1BALg6rQaoIpqZYd/68g6X4O6YSe/a/owsjPWP9BzaE1fPsCezwIEYbGVIl5bbciq14ssRNf2JOVPc1x5oaCdCyIaBFAV0pvfz41HNJETR2w7YBEautZU3cCi/hkPrrcxWFvwsb3uzv2efDkyTOf6jwQj0vT0/VCiCQTJFtOOcCIx78=
+    global:
+        secure: vks+QPJonJUx+c53A9/YFCwsq6hJP7OOtp6xVk0gi4rv78+/Wvyw0U27/HCoUnfsnH83/VKFC+6fi4R4n9h34aeN9lgAeKlYeiA3M/UwnQ7qeFFg/cGz/XCEr306SGERvcku8HCSfqriyT6HqXVCudkqZV3+dRPg7TH3ysLfOo01lDCC1SatDnl81H6yAGRO6uWa/rOl6q4bBHtleNw8tUIsrk2uQOGY7NdB4o0cY0HajtetUU+BCt70HAG4AcDBW5F2k2i4B4ppKfWcxgbiSNcd6aWeXU9kxpsOK3+JCUbvuTcXj/yQAxC/STcjkebod4E8K7p7wkM9YVBBYtQzY1UZalEY5ZClt/BGRT71S/abyUhJ9zjVjgGvkMHag+VPmH/23/xcilTa3H0O+ujXlaECAmGnOqAeUleeAH2K4hEKV5pG706pjDU+c/3cEja4e6kLhlLrGpkud9g7dhW377s2R3ikqifflNaUXEy/Ygzx6T3f655c4xxcCfJ/1BALg6rQaoIpqZYd/68g6X4O6YSe/a/owsjPWP9BzaE1fPsCezwIEYbGVIl5bbciq14ssRNf2JOVPc1x5oaCdCyIaBFAV0pvfz41HNJETR2w7YBEautZU3cCi/hkPrrcxWFvwsb3uzv2efDkyTOf6jwQj0vT0/VCiCQTJFtOOcCIx78=
