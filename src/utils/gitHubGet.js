@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const jw = 'https://api.github.com/users/kayle7777';
-
 const readme = url => `https://raw.githubusercontent.com/${url.replace(/^.*\.com\//, '')}/master/README.md`;
 const tryReadme = async url => {
     try {
@@ -17,6 +15,7 @@ export default {
     // when express hits /api/gitHub/
     getAllRepoData: async (req, res) => {
         try {
+            const jw = 'https://api.github.com/users/kayle7777';
             let data = await axios.get(`${jw}/repos?sort=updated`);
             const owner = data.data[0].owner;
             data = data.data.map(gitObj => {

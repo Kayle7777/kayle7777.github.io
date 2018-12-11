@@ -6,10 +6,11 @@ test('github v3 standard API repos', async () => {
     try {
         let gotData = await gitHubAPI.getAllRepoData();
         let failCount = 0;
-        for (let x of gotData.repos) {
+        gotData = gotData.repos;
+        for (let x of gotData) {
             if (!x.readme_url) failCount++;
         }
-        expect(gotData.repos.length).toBeGreaterThan(1);
+        expect(gotData.length).toBeGreaterThan(1);
         expect(failCount).toBeLessThan(15);
     } catch (err) {
         throw err;
