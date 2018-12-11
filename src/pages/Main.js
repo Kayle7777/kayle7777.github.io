@@ -16,17 +16,19 @@ const Main = props => {
 
     const fetchData = async () => {
         // Implement localhost caching here once ready
-        let repos = await graphql(repoSchema);
-        let owner = await graphql(ownerSchema);
-        let pinnedRepos = await graphql(pinnedRepoSchema);
-        repos.data.viewer.repositories.nodes = repos.data.viewer.repositories.nodes.filter(e => {
-            let test = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
+        let gqlData = await Promise.all([graphql(repoSchema), graphql(ownerSchema), graphql(pinnedRepoSchema)]);
+        gqlData[0].data.viewer.repositories.nodes = gqlData[0].data.viewer.repositories.nodes.filter(e => {
+            let test = gqlData[2].data.viewer.pinnedRepositories.edges.map(each => each.node.name);
             return !test.includes(e.name);
         });
-        pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => e.node);
+        gqlData[2] = gqlData[2].data.viewer.pinnedRepositories.edges.map(e => e.node);
 
         // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
-        setRepos({ owner: owner.data.viewer, repos: repos.data.viewer.repositories.nodes, pinnedRepos: pinnedRepos });
+        setRepos({
+            owner: gqlData[1].data.viewer,
+            repos: gqlData[0].data.viewer.repositories.nodes,
+            pinnedRepos: gqlData[2],
+        });
     };
 
     useEffect(() => {
