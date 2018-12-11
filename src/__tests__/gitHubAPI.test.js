@@ -1,6 +1,3 @@
-const request = require('supertest');
-const server = require('../server');
-
 jest.setTimeout(30000);
 
 test('github v3 standard API repos', async () => {

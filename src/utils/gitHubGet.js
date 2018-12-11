@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const jw = 'https://api.github.com/users/kayle7777';
 
@@ -12,7 +12,7 @@ const tryReadme = async url => {
     }
 };
 
-module.exports = {
+export default {
     // old github v3 API
     // when express hits /api/gitHub/
     getAllRepoData: async (req, res) => {
@@ -35,13 +35,12 @@ module.exports = {
                 data[i]['readme_url'] = readmes[i].url;
                 data[i]['readme'] = readmes[i].data;
             }
-            res.json({
+            return {
                 owner: owner,
                 repos: data,
-            });
-            console.log(`Sent data, including owner info and ${data.length} code repo information packets.`);
+            };
         } catch (err) {
-            res.send(err);
+            return err;
         }
     },
     // new github v4 API, using graphQL
@@ -82,7 +81,7 @@ module.exports = {
                     }`,
                 },
             });
-            res.send(result.data);
+            return result.data;
         } catch (err) {
             console.log(`Man, you still don't get it!!\n\n${err}`);
         }
