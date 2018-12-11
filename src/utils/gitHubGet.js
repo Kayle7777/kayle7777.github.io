@@ -44,7 +44,7 @@ export default {
     },
     // new github v4 API, using graphQL
     // when express hits /api/gitHub/graphql
-    graphQLgitData: async (req, res) => {
+    graphql: async schema => {
         const axiosGitHubGraphQL = axios.create({
             baseURL: 'https://api.github.com/graphql',
             headers: {
@@ -57,32 +57,68 @@ export default {
                 method: 'post',
                 data: {
                     // This really should be in a separate .gql file
-                    query: `{
-                        viewer {
-                            name
-                            repositories(last: 30) {
-                                nodes {
-                                    name
-                                    createdAt
-                                    updatedAt
-                                    pushedAt
-                                    description
-                                    id
-                                    url
-                                    readme: object(expression: "master:README.md") {
-                                        ... on Blob {
-                                            text
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }`,
+                    query: schema,
                 },
             });
             return result.data;
         } catch (err) {
-            console.log(`Man, you still don't get it!!\n\n${err}`);
+            console.log(err);
         }
     },
+    repoSchema: `{
+        viewer {
+            repositories(last: 30) {
+                nodes {
+                    name
+                    createdAt
+                    updatedAt
+                    pushedAt
+                    description
+                    id
+                    url
+                    readme: object(expression: "master:README.md") {
+                        ... on Blob {
+                            text
+                        }
+                    }
+                }
+            }
+        }
+    }`,
+    pinnedRepoSchema: `{
+        viewer {
+            pinnedRepositories(last: 4) {
+                edges {
+                    node {
+                        name
+                        createdAt
+                        updatedAt
+                        pushedAt
+                        description
+                        id
+                        url
+                        readme: object(expression: "master:README.md") {
+                            ... on Blob {
+                                text
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }`,
+    ownerSchema: `{
+        viewer {
+            bio
+            createdAt
+            email
+            isHireable
+            login
+            location
+            name
+            url
+            updatedAt
+            company
+        }
+    }`,
 };
