@@ -36,7 +36,7 @@ const RepoPanelItem = props => {
     return (
         // expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}
         <ListItem button onClick={() => clickFunction(index)}>
-            <ListItemText primary={repoData.name.slice(0, 12) + '...'} />
+            <ListItemText primary={repoData.name.length >= 12 ? repoData.name.slice(0, 12) + '...' : repoData.name} />
             <ListItemIcon>
                 <PlayArrow className={selectedRepo == index ? classes.iconShift : classes.icon} />
             </ListItemIcon>
