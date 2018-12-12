@@ -10,14 +10,14 @@ const styles = theme => ({
         backgroundColor: theme.palette.background.paper,
     },
     icon: {
-        transform: 'rotate(0deg)',
+        transform: 'rotate(180deg)',
         transition: theme.transitions.create(['transform'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
         }),
     },
     iconShift: {
-        transform: 'rotate(180deg)',
+        transform: 'rotate(0deg)',
         transition: theme.transitions.create(['transform'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.complex,

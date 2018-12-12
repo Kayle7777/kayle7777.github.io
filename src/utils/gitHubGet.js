@@ -36,7 +36,7 @@ export default {
     },
     repoSchema: `{
         viewer {
-            repositories(last: 30) {
+            repositories(last: 30, orderBy: {field: UPDATED_AT, direction: DESC}) {
                 nodes {
                     name
                     createdAt

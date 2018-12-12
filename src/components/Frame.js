@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton, Hidden, Drawer } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Drawer } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
+const drawerWidth = 240;
 const styles = theme => ({
     root: {
-        flexGrow: 1,
+        display: 'flex',
+    },
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
     },
     appBar: {
-        marginLeft: 240,
+        marginLeft: drawerWidth,
         [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - 240px)`,
+            width: `calc(100% - ${drawerWidth}px)`,
         },
     },
     menuButton: {
@@ -19,21 +26,20 @@ const styles = theme => ({
             display: 'none',
         },
     },
-    drawer: {
-        [theme.breakpoints.up('sm')]: {
-            width: 240,
-            flexShrink: 0,
-        },
+    toolbar: theme.mixins.toolbar,
+    drawerPaper: {
+        width: drawerWidth,
     },
-    drawerWidth: {
-        width: 240,
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
     },
 });
 
 const Frame = props => {
     const { classes, theme } = props;
     const [mobileOpen, navToggle] = useState(false);
-
+    const [listItems, ...rest] = props.children;
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -54,18 +60,21 @@ const Frame = props => {
                 <Hidden smUp implementation="css">
                     {/* This is the variant temp for mobile section */}
                     <Drawer
+                        container={props.container}
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                         open={mobileOpen}
                         onClose={() => navToggle(!mobileOpen)}
                         classes={{
-                            paper: classes.drawerWidth,
+                            paper: classes.drawerPaper,
                         }}
                         ModalProps={{
                             keepMounted: true,
                         }}
                     >
-                        {props.children}
+                        <div className={classes.toolbar} />
+                        <Divider />
+                        {listItems}
                     </Drawer>
                 </Hidden>
                 <Hidden xsDown implementation="css">
@@ -74,13 +83,19 @@ const Frame = props => {
                         variant="permanent"
                         open
                         classes={{
-                            paper: classes.drawerWidth,
+                            paper: classes.drawerPaper,
                         }}
                     >
-                        {props.children}
+                        <div className={classes.toolbar} />
+                        <Divider />
+                        {listItems}
                     </Drawer>
                 </Hidden>
             </nav>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                {rest}
+            </main>
         </div>
     );
 };

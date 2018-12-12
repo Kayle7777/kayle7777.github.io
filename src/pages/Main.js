@@ -3,6 +3,7 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import { List, Typography, Grid } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
+import MainPanel from '../components/MainPanel';
 import API from '../utils/gitHubGet';
 const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 
@@ -16,19 +17,26 @@ const Main = props => {
 
     const fetchData = async () => {
         // Implement localhost caching here once ready
-        let gqlData = await Promise.all([graphql(repoSchema), graphql(ownerSchema), graphql(pinnedRepoSchema)]);
-        gqlData[0].data.viewer.repositories.nodes = gqlData[0].data.viewer.repositories.nodes.filter(e => {
-            let test = gqlData[2].data.viewer.pinnedRepositories.edges.map(each => each.node.name);
+        let [repos, owner, pinnedRepos] = await Promise.all([
+            graphql(repoSchema),
+            graphql(ownerSchema),
+            graphql(pinnedRepoSchema),
+        ]);
+        repos.data.viewer.repositories.nodes = repos.data.viewer.repositories.nodes.filter(e => {
+            let test = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
             return !test.includes(e.name);
         });
-        gqlData[2] = gqlData[2].data.viewer.pinnedRepositories.edges.map(e => e.node);
-
+        pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => e.node);
+        repos.data.viewer.repositories.nodes.unshift(...pinnedRepos);
         // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
         setRepos({
-            owner: gqlData[1].data.viewer,
-            repos: gqlData[0].data.viewer.repositories.nodes,
-            pinnedRepos: gqlData[2],
+            owner: owner.data.viewer,
+            repos: repos.data.viewer.repositories.nodes,
+            pinnedRepos: pinnedRepos,
         });
+        for (let i in repos.data.viewer.repositories.nodes) {
+            if (repos.data.viewer.repositories.nodes[i].name === 'kayle7777.github.io') selectRepo(parseInt(i));
+        }
     };
 
     useEffect(() => {
@@ -51,11 +59,8 @@ const Main = props => {
                         );
                     })}
                 </List>
+                {gitData.repos[selectedRepo] && <MainPanel readme={gitData.repos[selectedRepo].readme} />}
             </Frame>
-            <Grid container>
-                <Grid item md={2} />
-                <Grid item>placeholder</Grid>
-            </Grid>
         </>
     );
 };
