@@ -27,7 +27,7 @@ const Main = props => {
             return !test.includes(e.name);
         });
         pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => e.node);
-        repos.data.viewer.repositories.nodes.unshift(...pinnedRepos);
+        repos.data.viewer.repositories.nodes.unshift(...pinnedRepos.reverse());
         // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
         setRepos({
             owner: owner.data.viewer,
@@ -35,7 +35,7 @@ const Main = props => {
             pinnedRepos: pinnedRepos,
         });
         for (let i in repos.data.viewer.repositories.nodes) {
-            if (repos.data.viewer.repositories.nodes[i].name === 'kayle7777.github.io') selectRepo(parseInt(i));
+            if (repos.data.viewer.repositories.nodes[i].name === 'kayle7777.github.io') selectRepo(i);
         }
     };
 
