@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { withStyles, withTheme } from '@material-ui/core/styles';
-import { List, Typography, Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { List, Button } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
 import MainPanel from '../components/MainPanel';
@@ -9,11 +9,15 @@ const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
+    button: {
+        margin: theme.spacing.unit,
+    },
 });
 
 const Main = props => {
     const [gitData, setRepos] = useState({ owner: {}, repos: [], pinnedRepos: [] });
     const [selectedRepo, selectRepo] = useState(null);
+    // const [selectedTheme, pickTheme] = useState('default');
 
     const fetchData = async () => {
         // Implement localhost caching here once ready
@@ -59,6 +63,20 @@ const Main = props => {
                         );
                     })}
                 </List>
+                {gitData.repos[selectedRepo] &&
+                    gitData.repos[selectedRepo].repositoryTopics.edges.map(e => {
+                        return (
+                            <Button
+                                href={`https://github.com/topics/${e.node.topic.name}`}
+                                className={props.classes.button}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                key={e.node.topic.name.substr(0, 5) + '...'}
+                            >
+                                {e.node.topic.name}
+                            </Button>
+                        );
+                    })}
                 {gitData.repos[selectedRepo] && <MainPanel readme={gitData.repos[selectedRepo].readme} />}
             </Frame>
         </>

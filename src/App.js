@@ -1,10 +1,10 @@
 import React from 'react';
 import Main from './pages/Main';
 
-const App = () => {
+const App = props => {
     return (
         <>
-            <Main />
+            <Main selectTheme={props.selectTheme} />
         </>
     );
 };

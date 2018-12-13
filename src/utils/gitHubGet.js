@@ -1,18 +1,7 @@
 import axios from 'axios';
 
-const readme = url => `https://raw.githubusercontent.com/${url.replace(/^.*\.com\//, '')}/master/README.md`;
-const tryReadme = async url => {
-    try {
-        let data = await axios.get(readme(url));
-        return { url: url, data: data.data };
-    } catch (err) {
-        return { url: null, data: null };
-    }
-};
-
 export default {
     // new github v4 API, using graphQL
-    // when express hits /api/gitHub/graphql
     graphql: async schema => {
         const axiosGitHubGraphQL = axios.create({
             baseURL: 'https://api.github.com/graphql',
@@ -45,6 +34,15 @@ export default {
                     description
                     id
                     url
+                    repositoryTopics(last: 4) {
+                        edges {
+                            node {
+                                topic {
+                                    name
+                                }
+                            }
+                        }
+                    }
                     readme: object(expression: "master:README.md") {
                         ... on Blob {
                             text
@@ -66,6 +64,15 @@ export default {
                         description
                         id
                         url
+                        repositoryTopics(last: 4) {
+                            edges {
+                                node {
+                                    topic {
+                                        name
+                                    }
+                                }
+                            }
+                        }
                         readme: object(expression: "master:README.md") {
                             ... on Blob {
                                 text

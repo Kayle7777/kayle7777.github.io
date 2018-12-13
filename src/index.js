@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
+import themes from './themes';
 
-const theme = createMuiTheme({
-    palette: {
-        type: 'dark',
-    },
-});
+const selectTheme = listOfTopics => {
+    // select first of match 'react' 'angular' 'ember' 'vue' from list of topics
+    for (let x of listOfTopics) if (['react', 'angular', 'ember', 'vue'].includes(x.toLowerCase())) return; // themePicker(x.toLowerCase());
+};
 
 ReactDOM.render(
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={themes.default}>
         <CssBaseline />
-        <App />
+        <App selectTheme={selectTheme} />
     </MuiThemeProvider>,
     document.getElementById('root')
 );
