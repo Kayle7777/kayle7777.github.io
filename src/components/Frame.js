@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Drawer } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Button, Hidden, Divider, Drawer } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
 const drawerWidth = 240;
@@ -47,13 +47,13 @@ const Frame = props => {
                     <IconButton
                         aria-label="Open Drawer"
                         onClick={() => navToggle(!mobileOpen)}
-                        className={classes.menuButton}
-                    >
+                        className={classes.menuButton}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         Nav
                     </Typography>
+                    <Button onClick={() => sessionStorage.clear()}>clear session storage</Button>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer}>
@@ -70,8 +70,7 @@ const Frame = props => {
                         }}
                         ModalProps={{
                             keepMounted: true,
-                        }}
-                    >
+                        }}>
                         <div className={classes.toolbar} />
                         <Divider />
                         {listItems}
@@ -84,8 +83,7 @@ const Frame = props => {
                         open
                         classes={{
                             paper: classes.drawerPaper,
-                        }}
-                    >
+                        }}>
                         <div className={classes.toolbar} />
                         <Divider />
                         {listItems}

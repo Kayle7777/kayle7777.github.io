@@ -7,7 +7,7 @@ const MainPanel = props => {
         <Card>
             <CardContent>
                 <Typography component="div" variant="body2">
-                    {props.readme !== null && compiler(props.readme.text)}
+                    {props.readme && compiler(props.readme.text)}
                 </Typography>
             </CardContent>
         </Card>
