@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
-import { ArrowForwardIos as PlayArrow } from '@material-ui/icons';
+import { ArrowForwardIos as PlayArrow, Star } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
@@ -24,10 +24,32 @@ const styles = theme => ({
             duration: theme.transitions.duration.complex,
         }),
     },
+    listItem: {
+        backgroundSize: '200% 100%',
+        backgroundImage: `linear-gradient(to right, ${theme.palette.background.paper} 50%, ${
+            theme.palette.primary.light
+        } 50%)`,
+        backgroundPosition: '-100%',
+        transition: theme.transitions.create(['background-position'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.complex,
+        }),
+    },
+    listItemShift: {
+        backgroundSize: '200% 100%',
+        backgroundImage: `linear-gradient(to right, ${theme.palette.background.paper} 50%, ${
+            theme.palette.primary.light
+        } 50%)`,
+        backgroundPosition: '0',
+        transition: theme.transitions.create(['background-position'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.complex,
+        }),
+    },
 });
 
 const RepoPanelItem = props => {
-    let { classes, selectedRepo, selectRepo, name, index } = props;
+    let { classes, selectedRepo, selectRepo, name, index, pinned } = props;
     const clickFunction = index => {
         if (index === selectedRepo) {
             selectRepo(null);
@@ -35,8 +57,17 @@ const RepoPanelItem = props => {
     };
     const selected = selectedRepo == index;
     return (
-        // expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}
-        <ListItem selected={selected} button onClick={() => clickFunction(index)}>
+        <ListItem
+            selected={selected}
+            className={selected ? classes.listItem : classes.listItemShift}
+            button
+            onClick={() => clickFunction(index)}
+        >
+            {pinned && (
+                <ListItemIcon>
+                    <Star />
+                </ListItemIcon>
+            )}
             <ListItemText primary={name.length >= 12 ? name.slice(0, 12) + '...' : name} />
             <ListItemIcon>
                 <PlayArrow className={selected ? classes.iconShift : classes.icon} />

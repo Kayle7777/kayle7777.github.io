@@ -35,7 +35,10 @@ const Main = props => {
                 let pinnedFilter = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
                 return !pinnedFilter.includes(e.name);
             });
-            pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => e.node);
+            pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => {
+                e.node['isPinned'] = true;
+                return e.node;
+            });
             repos.data.viewer.repositories.nodes.unshift(...pinnedRepos.reverse());
             // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
             let finalData = {
@@ -58,7 +61,7 @@ const Main = props => {
 
     return (
         <>
-            <Frame>
+            <Frame owner={gitData.owner} repos={gitData.repos}>
                 <List className={props.classes.toolbar}>
                     {gitData.repos.map((repoData, index) => {
                         return (
@@ -68,6 +71,7 @@ const Main = props => {
                                 name={repoData.name}
                                 index={index}
                                 key={repoData.id}
+                                pinned={repoData.isPinned}
                             />
                         );
                     })}
@@ -81,7 +85,8 @@ const Main = props => {
                                 className={props.classes.button}
                                 target="_blank"
                                 rel="noreferrer noopener"
-                                key={topicName.substr(0, 5) + '...'}>
+                                key={topicName.substr(0, 5) + '...'}
+                            >
                                 {topicName}
                             </Button>
                         );

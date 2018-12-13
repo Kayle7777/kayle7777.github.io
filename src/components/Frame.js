@@ -1,12 +1,25 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton, Button, Hidden, Divider, Drawer } from '@material-ui/core';
+import {
+    AppBar,
+    Toolbar,
+    Typography,
+    IconButton,
+    Button,
+    Hidden,
+    Divider,
+    Drawer,
+    CardContent,
+} from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
 const drawerWidth = 240;
 const styles = theme => ({
     root: {
         display: 'flex',
+    },
+    grow: {
+        flexGrow: 1,
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
@@ -37,9 +50,9 @@ const styles = theme => ({
 });
 
 const Frame = props => {
-    const { classes, theme } = props;
+    const { classes, theme, owner, repos } = props;
     const [mobileOpen, navToggle] = useState(false);
-    const [listItems, ...rest] = props.children;
+    const [ListItems, ...Rest] = props.children;
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -47,11 +60,12 @@ const Frame = props => {
                     <IconButton
                         aria-label="Open Drawer"
                         onClick={() => navToggle(!mobileOpen)}
-                        className={classes.menuButton}>
+                        className={classes.menuButton}
+                    >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap>
-                        Nav
+                    <Typography variant="h6" noWrap className={classes.grow}>
+                        {owner.name}
                     </Typography>
                     <Button onClick={() => sessionStorage.clear()}>clear session storage</Button>
                 </Toolbar>
@@ -70,10 +84,16 @@ const Frame = props => {
                         }}
                         ModalProps={{
                             keepMounted: true,
-                        }}>
-                        <div className={classes.toolbar} />
+                        }}
+                    >
+                        {/* <div className={classes.toolbar} /> */}
+                        <CardContent className={classes.toolbar}>
+                            <Typography noWrap align="center" variant="overline">
+                                sort by last updated
+                            </Typography>
+                        </CardContent>
                         <Divider />
-                        {listItems}
+                        {ListItems}
                     </Drawer>
                 </Hidden>
                 <Hidden xsDown implementation="css">
@@ -83,16 +103,22 @@ const Frame = props => {
                         open
                         classes={{
                             paper: classes.drawerPaper,
-                        }}>
-                        <div className={classes.toolbar} />
+                        }}
+                    >
+                        {/* <div className={classes.toolbar} /> */}
+                        <CardContent className={classes.toolbar}>
+                            <Typography noWrap align="center" variant="overline">
+                                sort by last updated
+                            </Typography>
+                        </CardContent>
                         <Divider />
-                        {listItems}
+                        {ListItems}
                     </Drawer>
                 </Hidden>
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                {rest}
+                {Rest}
             </main>
         </div>
     );

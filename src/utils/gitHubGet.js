@@ -14,7 +14,6 @@ export default {
                 url: '',
                 method: 'post',
                 data: {
-                    // This really should be in a separate .gql file
                     query: schema,
                 },
             });
