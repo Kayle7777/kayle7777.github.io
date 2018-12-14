@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { ListItem, ListItemIcon, ListItemText, Divider } from '@material-ui/core';
+import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { ArrowForwardIos as PlayArrow, Star } from '@material-ui/icons';
 
 const styles = theme => ({
@@ -56,8 +56,7 @@ const RepoPanelItem = props => {
             selected={selected}
             className={selected ? classes.listItem : classes.listItemShift}
             button
-            onClick={selected ? () => selectRepo(null) : () => selectRepo(index)}
-        >
+            onClick={selected ? () => selectRepo(null) : () => selectRepo(index)}>
             {pinned && (
                 <ListItemIcon>
                     <Star />

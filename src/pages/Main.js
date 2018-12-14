@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import { List, Button } from '@material-ui/core';
+import { List } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
 import MainPanel from '../components/MainPanel';
+import InfoPanel from '../components/InfoPanel';
 import API from '../utils/gitHubGet';
 const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
-    button: {
-        margin: theme.spacing.unit / 2,
-    },
 });
 
 const Main = props => {
@@ -61,7 +59,7 @@ const Main = props => {
 
     return (
         <>
-            <Frame owner={gitData.owner}>
+            <Frame name={gitData.owner.name}>
                 <List className={props.classes.toolbar}>
                     {gitData.repos.map((repoData, index) => {
                         return (
@@ -76,21 +74,7 @@ const Main = props => {
                         );
                     })}
                 </List>
-                {gitData.repos[selectedRepo] &&
-                    gitData.repos[selectedRepo].repositoryTopics.edges.map(each => {
-                        const topicName = each.node.topic.name;
-                        return (
-                            <Button
-                                href={`https://github.com/topics/${topicName}`}
-                                className={props.classes.button}
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                key={topicName.substr(0, 5) + '...'}
-                            >
-                                {topicName}
-                            </Button>
-                        );
-                    })}
+                {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
                 {gitData.repos[selectedRepo] && <MainPanel readme={gitData.repos[selectedRepo].readme} />}
             </Frame>
         </>
