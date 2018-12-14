@@ -26,6 +26,13 @@ export default {
         viewer {
             repositories(last: 30, orderBy: {field: UPDATED_AT, direction: DESC}) {
                 nodes {
+                    commitCount: object(expression:"master") {
+                        ... on Commit {
+                            history {
+                                totalCount
+                            }
+                        }
+                    }
                     name
                     createdAt
                     updatedAt
@@ -56,6 +63,13 @@ export default {
             pinnedRepositories(last: 6) {
                 edges {
                     node {
+                        commitCount: object(expression:"master") {
+                            ... on Commit {
+                                history {
+                                    totalCount
+                                }
+                            }
+                        }
                         name
                         createdAt
                         updatedAt
