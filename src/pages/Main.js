@@ -45,11 +45,11 @@ const Main = props => {
             };
             setRepos(finalData);
             sessionStorage.setItem('apiData', JSON.stringify(finalData));
-            pickInitialRepo(finalData.repos);
+            return pickInitialRepo(finalData.repos);
         } else {
             cached = JSON.parse(cached);
             setRepos(cached);
-            pickInitialRepo(cached.repos);
+            return pickInitialRepo(cached.repos);
         }
     };
 
@@ -74,8 +74,12 @@ const Main = props => {
                         );
                     })}
                 </List>
-                {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
-                {gitData.repos[selectedRepo] && <MainPanel readme={gitData.repos[selectedRepo].readme} />}
+                {gitData.repos[selectedRepo] && (
+                    <>
+                        <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />
+                        <MainPanel readme={gitData.repos[selectedRepo].readme} />
+                    </>
+                )}
             </Frame>
         </>
     );

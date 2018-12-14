@@ -36,8 +36,8 @@ const InfoPanel = ({ repo, owner, classes }) => {
     const topics = repo.repositoryTopics.edges;
     return (
         <Card className={`${classes.card} ${classes.center}`}>
-            <CardHeader className={classes.header} title="Extra info regarding this project" />
-            <CardContent />
+            <CardHeader className={classes.header} title={repo.name} />
+            <CardContent>{repo.description}</CardContent>
             <CardActions className={classes.centerButtons}>
                 {topics.length > 0 && (
                     <>
