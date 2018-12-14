@@ -50,7 +50,7 @@ const styles = theme => ({
 });
 
 const Frame = props => {
-    const { classes, theme, owner, repos } = props;
+    const { classes, theme, owner } = props;
     const [mobileOpen, navToggle] = useState(false);
     const [ListItems, ...Rest] = props.children;
     return (

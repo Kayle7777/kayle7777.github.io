@@ -53,7 +53,7 @@ export default {
     }`,
     pinnedRepoSchema: `{
         viewer {
-            pinnedRepositories(last: 4) {
+            pinnedRepositories(last: 6) {
                 edges {
                     node {
                         name
@@ -63,7 +63,7 @@ export default {
                         description
                         id
                         url
-                        repositoryTopics(last: 4) {
+                        repositoryTopics(last: 10) {
                             edges {
                                 node {
                                     topic {

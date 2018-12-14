@@ -50,18 +50,13 @@ const styles = theme => ({
 
 const RepoPanelItem = props => {
     let { classes, selectedRepo, selectRepo, name, index, pinned } = props;
-    const clickFunction = index => {
-        if (index === selectedRepo) {
-            selectRepo(null);
-        } else selectRepo(index);
-    };
     const selected = selectedRepo == index;
     return (
         <ListItem
             selected={selected}
             className={selected ? classes.listItem : classes.listItemShift}
             button
-            onClick={() => clickFunction(index)}
+            onClick={selected ? () => selectRepo(null) : () => selectRepo(index)}
         >
             {pinned && (
                 <ListItemIcon>

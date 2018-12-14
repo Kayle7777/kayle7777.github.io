@@ -61,7 +61,7 @@ const Main = props => {
 
     return (
         <>
-            <Frame owner={gitData.owner} repos={gitData.repos}>
+            <Frame owner={gitData.owner}>
                 <List className={props.classes.toolbar}>
                     {gitData.repos.map((repoData, index) => {
                         return (
