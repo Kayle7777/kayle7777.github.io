@@ -56,7 +56,7 @@ const RepoPanelItem = props => {
             selected={selected}
             className={selected ? classes.listItem : classes.listItemShift}
             button
-            onClick={selected ? () => selectRepo(null) : () => selectRepo(index)}>
+            onClick={() => selectRepo(prevRepo => (selected ? null : index))}>
             {pinned && (
                 <ListItemIcon>
                     <Star />
