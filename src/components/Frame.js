@@ -60,7 +60,8 @@ const Frame = props => {
                     <IconButton
                         aria-label="Open Drawer"
                         onClick={() => navToggle(!mobileOpen)}
-                        className={classes.menuButton}>
+                        className={classes.menuButton}
+                    >
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap className={classes.grow}>
@@ -83,7 +84,8 @@ const Frame = props => {
                         }}
                         ModalProps={{
                             keepMounted: true,
-                        }}>
+                        }}
+                    >
                         {/* <div className={classes.toolbar} /> */}
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
@@ -101,7 +103,8 @@ const Frame = props => {
                         open
                         classes={{
                             paper: classes.drawerPaper,
-                        }}>
+                        }}
+                    >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
                                 sort by last updated

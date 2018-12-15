@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
@@ -11,10 +11,11 @@ const styles = theme => ({
     toolbar: theme.mixins.toolbar,
 });
 
+export const DataContext = createContext();
+
 const Main = props => {
     const [selectedRepo, selectRepo] = useState(null);
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
-    // const [selectedTheme, pickTheme] = useState('default');
 
     const pickInitialRepo = nodeList => {
         for (let i in nodeList) if (nodeList[i].name === 'kayle7777.github.io') return selectRepo(i);
@@ -57,32 +58,26 @@ const Main = props => {
     }, gitData);
 
     return (
-        <Frame name={gitData.owner.name}>
-            <List className={props.classes.toolbar}>
-                {gitData.repos.map((repoData, index) => {
-                    return (
-                        <RepoPanelItem
-                            selectedRepo={selectedRepo}
-                            selectRepo={selectRepo}
-                            name={repoData.name}
-                            index={index}
-                            key={repoData.id}
-                            pinned={repoData.isPinned}
-                            topics={repoData.repositoryTopics.edges}
-                        />
-                    );
-                })}
-            </List>
-            {gitData.repos[selectedRepo] && (
-                <>
-                    <MainPanel
-                        owner={gitData.owner}
-                        repo={gitData.repos[selectedRepo]}
-                        readme={gitData.repos[selectedRepo].readme}
-                    />
-                </>
-            )}
-        </Frame>
+        <DataContext.Provider value={gitData}>
+            <Frame name={gitData.owner.name}>
+                <List className={props.classes.toolbar}>
+                    {gitData.repos.map((repoData, index) => {
+                        return (
+                            <RepoPanelItem
+                                selectedRepo={selectedRepo}
+                                selectRepo={selectRepo}
+                                name={repoData.name}
+                                index={index}
+                                key={repoData.id}
+                                pinned={repoData.isPinned}
+                                topics={repoData.repositoryTopics.edges}
+                            />
+                        );
+                    })}
+                </List>
+                {gitData.repos[selectedRepo] && <MainPanel selectedRepo={selectedRepo} />}
+            </Frame>
+        </DataContext.Provider>
     );
 };
 

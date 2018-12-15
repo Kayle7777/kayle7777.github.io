@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { compiler } from 'markdown-to-jsx';
 import { Card, CardContent, Typography, Collapse, CardActionArea } from '@material-ui/core';
 import { KeyboardArrowUp } from '@material-ui/icons';
 import { withStyles } from '@material-ui/styles';
 import InfoPanel from './InfoPanel';
+import { DataContext } from '../pages/Main';
 
 const style = theme => ({
     center: {
@@ -28,13 +29,17 @@ const style = theme => ({
 });
 
 const MainPanel = props => {
-    const { owner, repo, readme, classes } = props;
+    const gitData = useContext(DataContext);
     const [panelIn, togglePanel] = useState(false);
     useEffect(() => togglePanel(false), [props]);
 
+    const { selectedRepo, classes } = props;
+    const { owner, repos } = gitData;
+    const [repo, readme] = [repos[selectedRepo], repos[selectedRepo].readme];
+
     return (
         <>
-            {props.readme && (
+            {readme && (
                 <Card>
                     <CardActionArea onClick={() => togglePanel(!panelIn)} className={classes.center}>
                         <Typography>

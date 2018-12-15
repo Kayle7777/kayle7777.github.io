@@ -67,7 +67,7 @@ const RepoPanelItem = props => {
             button
             onClick={() => {
                 setTheme(selectTheme(topics.map(each => each.node.topic.name)));
-                return selectRepo(prevRepo => (selected ? null : index));
+                return selectRepo(selected ? null : index);
             }}
         >
             {pinned && (
@@ -75,7 +75,7 @@ const RepoPanelItem = props => {
                     <Star />
                 </ListItemIcon>
             )}
-            <ListItemText primary={name.length >= 12 ? name.slice(0, 12) + '...' : name} />
+            <ListItemText primary={name} primaryTypographyProps={{ noWrap: true }} />
             <ListItemIcon>
                 <PlayArrow className={selected ? classes.iconShift : classes.icon} />
             </ListItemIcon>
