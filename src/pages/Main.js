@@ -68,6 +68,7 @@ const Main = props => {
                             index={index}
                             key={repoData.id}
                             pinned={repoData.isPinned}
+                            topics={repoData.repositoryTopics.edges}
                         />
                     );
                 })}

@@ -31,9 +31,10 @@ const MainPanel = props => {
     const { owner, repo, readme, classes } = props;
     const [panelIn, togglePanel] = useState(false);
     useEffect(() => togglePanel(false), [props]);
+
     return (
         <>
-            {props.readme ? (
+            {props.readme && (
                 <Card>
                     <CardActionArea onClick={() => togglePanel(!panelIn)} className={classes.center}>
                         <Typography>
@@ -49,8 +50,6 @@ const MainPanel = props => {
                         </Typography>
                     </CardContent>
                 </Card>
-            ) : (
-                <div />
             )}
         </>
     );

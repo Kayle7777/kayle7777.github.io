@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import { ArrowForwardIos as PlayArrow, Star } from '@material-ui/icons';
+import { ThemeSelector } from '../App';
 
 const styles = theme => ({
     root: {
@@ -47,15 +48,28 @@ const styles = theme => ({
     },
 });
 
+const selectTheme = listOfTopics => {
+    // select first of match 'react' 'angular' 'ember' 'vue' from list of topics
+    for (let x of listOfTopics) if (['react', 'angular', 'ember', 'vue'].includes(x.toLowerCase())) return x;
+    return 'default';
+};
+
 const RepoPanelItem = props => {
-    let { classes, selectedRepo, selectRepo, name, index, pinned } = props;
+    let { classes, selectedRepo, selectRepo, name, index, pinned, topics } = props;
+    // eslint-disable-next-line
     const selected = selectedRepo == index;
+    // eslint-disable-next-line
+    const [theme, setTheme] = useContext(ThemeSelector);
     return (
         <ListItem
             selected={selected}
             className={selected ? classes.listItem : classes.listItemShift}
             button
-            onClick={() => selectRepo(prevRepo => (selected ? null : index))}>
+            onClick={() => {
+                setTheme(selectTheme(topics.map(each => each.node.topic.name)));
+                return selectRepo(prevRepo => (selected ? null : index));
+            }}
+        >
             {pinned && (
                 <ListItemIcon>
                     <Star />
