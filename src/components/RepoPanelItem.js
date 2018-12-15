@@ -11,7 +11,6 @@ const styles = theme => ({
     },
     icon: {
         transform: 'rotate(180deg)',
-
         transition: theme.transitions.create(['transform'], {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,

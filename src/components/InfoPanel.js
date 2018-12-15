@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardActions, CardHeader, CardMedia, Button, Typography } from '@material-ui/core';
+import { CardContent, CardActions, CardHeader, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -8,10 +8,6 @@ const styles = theme => ({
     },
     center: {
         margin: 'auto',
-    },
-    card: {
-        width: '75%',
-        marginBottom: theme.spacing.unit * 3,
     },
     header: {
         textAlign: 'center',
@@ -35,9 +31,13 @@ const Tag = ({ classes, topicName }) => (
 const InfoPanel = ({ repo, owner, classes }) => {
     const topics = repo.repositoryTopics.edges;
     return (
-        <Card className={`${classes.card} ${classes.center}`}>
+        <div className={classes.center}>
             <CardHeader className={classes.header} title={repo.name} />
-            <CardContent>{repo.description}</CardContent>
+            <CardContent>
+                <Typography align="center" variant="overline">
+                    {repo.description}
+                </Typography>
+            </CardContent>
             <CardActions className={classes.centerButtons}>
                 {topics.length > 0 && (
                     <>
@@ -49,8 +49,8 @@ const InfoPanel = ({ repo, owner, classes }) => {
                     </>
                 )}
             </CardActions>
-        </Card>
+        </div>
     );
 };
 
-export default withStyles(styles)(InfoPanel);
+export default withStyles(styles, { withTheme: true })(InfoPanel);
