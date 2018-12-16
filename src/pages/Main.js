@@ -3,7 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
-import MainPanel from '../components/MainPanel';
+import ReadmePanel from '../components/ReadmePanel';
+import InfoPanel from '../components/InfoPanel';
 import API from '../utils/gitHubGet';
 const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 
@@ -75,7 +76,8 @@ const Main = props => {
                         );
                     })}
                 </List>
-                {gitData.repos[selectedRepo] && <MainPanel selectedRepo={selectedRepo} />}
+                {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
+                {gitData.repos[selectedRepo] && <ReadmePanel readme={gitData.repos[selectedRepo].readme} />}
             </Frame>
         </DataContext.Provider>
     );

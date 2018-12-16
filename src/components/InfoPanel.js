@@ -1,5 +1,6 @@
-import React from 'react';
-import { CardContent, CardActions, CardHeader, Button, Typography } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { CardContent, CardActions, CardHeader, Button, Typography, CardActionArea, Collapse } from '@material-ui/core';
+import { KeyboardArrowUp } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -9,12 +10,28 @@ const styles = theme => ({
     center: {
         margin: 'auto',
     },
-    header: {
-        textAlign: 'center',
-    },
     centerButtons: {
         display: 'flex',
         justifyContent: 'center',
+    },
+    centerText: {
+        textAlign: 'center',
+    },
+    arrow: {
+        fontSize: '2.5rem',
+        transform: 'rotate(0deg)',
+        transition: theme.transitions.create(['transform'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.complex,
+        }),
+    },
+    arrowShift: {
+        fontSize: '2.5rem',
+        transform: 'rotate(180deg)',
+        transition: theme.transitions.create(['transform'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.complex,
+        }),
     },
 });
 
@@ -28,28 +45,47 @@ const Tag = ({ classes, topicName }) => (
     </Button>
 );
 
-const InfoPanel = ({ repo, owner, classes }) => {
+const InfoPanel = props => {
+    //eslint-disable-next-line
+    const { repo, owner, classes } = props;
     const topics = repo.repositoryTopics.edges;
+    const [panelIn, togglePanel] = useState(true);
+    useEffect(() => togglePanel(true), [props]);
     return (
-        <div className={classes.center}>
-            <CardHeader className={classes.header} title={repo.name} />
-            <CardContent>
-                <Typography align="center" variant="overline">
-                    {repo.description}
+        <>
+            <CardActionArea>
+                <Typography variant="button" onClick={() => togglePanel(!panelIn)} className={classes.centerText}>
+                    <KeyboardArrowUp className={panelIn ? classes.arrow : classes.arrowShift} />
                 </Typography>
-            </CardContent>
-            <CardActions className={classes.centerButtons}>
-                {topics.length > 0 && (
-                    <>
-                        <Typography variant="button">Tags: </Typography>
-                        {topics.map(each => {
-                            const topicName = each.node.topic.name;
-                            return <Tag key={topicName.substr(0, 5) + '...'} classes={classes} topicName={topicName} />;
-                        })}
-                    </>
-                )}
-            </CardActions>
-        </div>
+            </CardActionArea>
+            <Collapse in={panelIn}>
+                <div className={classes.center}>
+                    <CardHeader className={classes.centerText} title={repo.name} />
+                    <CardContent>
+                        <Typography align="center" variant="overline">
+                            {repo.description}
+                        </Typography>
+                    </CardContent>
+                    <CardActions className={classes.centerButtons}>
+                        {topics.length > 0 && (
+                            <>
+                                <Typography variant="button">Tags: </Typography>
+                                {topics.map(each => {
+                                    const topicName = each.node.topic.name;
+                                    return (
+                                        <Tag
+                                            key={topicName.substr(0, 5) + '...'}
+                                            classes={classes}
+                                            topicName={topicName}
+                                        />
+                                    );
+                                })}
+                            </>
+                        )}
+                    </CardActions>
+                </div>
+            </Collapse>
+        </>
     );
 };
 

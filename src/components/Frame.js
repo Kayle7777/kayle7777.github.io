@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
-const drawerWidth = 240;
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -23,14 +22,14 @@ const styles = theme => ({
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
-            width: drawerWidth,
+            width: 240,
             flexShrink: 0,
         },
     },
     appBar: {
-        marginLeft: drawerWidth,
+        marginLeft: 240,
         [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - ${drawerWidth}px)`,
+            width: `calc(100% - 240px)`,
         },
     },
     menuButton: {
@@ -41,7 +40,7 @@ const styles = theme => ({
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
-        width: drawerWidth,
+        width: 240,
     },
     content: {
         flexGrow: 1,
@@ -51,8 +50,8 @@ const styles = theme => ({
 
 const Frame = props => {
     const { classes, theme, name } = props;
-    const [mobileOpen, navToggle] = useState(false);
     const [ListItems, ...Rest] = props.children;
+    const [mobileOpen, navToggle] = useState(false);
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -60,8 +59,7 @@ const Frame = props => {
                     <IconButton
                         aria-label="Open Drawer"
                         onClick={() => navToggle(!mobileOpen)}
-                        className={classes.menuButton}
-                    >
+                        className={classes.menuButton}>
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap className={classes.grow}>
@@ -84,8 +82,7 @@ const Frame = props => {
                         }}
                         ModalProps={{
                             keepMounted: true,
-                        }}
-                    >
+                        }}>
                         {/* <div className={classes.toolbar} /> */}
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
@@ -103,8 +100,7 @@ const Frame = props => {
                         open
                         classes={{
                             paper: classes.drawerPaper,
-                        }}
-                    >
+                        }}>
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
                                 sort by last updated
