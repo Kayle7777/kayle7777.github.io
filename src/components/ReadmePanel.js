@@ -6,12 +6,12 @@ import { ThemeSelector, selectTheme } from '../App';
 
 const style = theme => ({});
 
-const ReadmePanel = ({ readme, classes, topics }) => {
-    // eslint-disable-next-line
+const ReadmePanel = props => {
+    const { readme, classes, topics } = props;
     const [theme, setTheme] = useContext(ThemeSelector);
+    let pickedTheme = selectTheme(topics);
     useEffect(
         () => {
-            let pickedTheme = selectTheme(topics);
             if (pickedTheme === 'default') {
                 if (theme === 'default') return;
                 else return setTheme('default');

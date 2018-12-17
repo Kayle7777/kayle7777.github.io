@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import {
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Button,
-    Hidden,
-    Divider,
-    Drawer,
-    CardContent,
-} from '@material-ui/core';
-import { Menu as MenuIcon } from '@material-ui/icons';
+import { AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Drawer, CardContent } from '@material-ui/core';
+import { Menu as MenuIcon, Home as HomeIcon } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
@@ -22,14 +12,14 @@ const styles = theme => ({
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
-            width: 240,
+            width: 280,
             flexShrink: 0,
         },
     },
     appBar: {
-        marginLeft: 240,
+        marginLeft: 280,
         [theme.breakpoints.up('sm')]: {
-            width: `calc(100% - 240px)`,
+            width: `calc(100% - 280px)`,
         },
     },
     menuButton: {
@@ -40,7 +30,7 @@ const styles = theme => ({
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
-        width: 240,
+        width: 280,
     },
     content: {
         flexGrow: 1,
@@ -49,7 +39,7 @@ const styles = theme => ({
 });
 
 const Frame = props => {
-    const { classes, theme, name } = props;
+    const { classes, theme, name, home } = props;
     const [ListItems, ...Rest] = props.children;
     const [mobileOpen, navToggle] = useState(false);
     return (
@@ -59,13 +49,16 @@ const Frame = props => {
                     <IconButton
                         aria-label="Open Drawer"
                         onClick={() => navToggle(!mobileOpen)}
-                        className={classes.menuButton}>
+                        className={classes.menuButton}
+                    >
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap className={classes.grow}>
                         {name}
                     </Typography>
-                    <Button onClick={() => sessionStorage.clear()}>clear session storage</Button>
+                    <IconButton aria-label="Go to main page" onClick={() => home()}>
+                        <HomeIcon />
+                    </IconButton>
                 </Toolbar>
             </AppBar>
             <nav className={classes.drawer}>
@@ -82,7 +75,8 @@ const Frame = props => {
                         }}
                         ModalProps={{
                             keepMounted: true,
-                        }}>
+                        }}
+                    >
                         {/* <div className={classes.toolbar} /> */}
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
@@ -100,7 +94,8 @@ const Frame = props => {
                         open
                         classes={{
                             paper: classes.drawerPaper,
-                        }}>
+                        }}
+                    >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
                                 sort by last updated

@@ -57,7 +57,7 @@ const Main = props => {
     }, gitData);
 
     return (
-        <Frame name={gitData.owner.name}>
+        <Frame name={gitData.owner.name} home={() => pickInitialRepo(gitData.repos)}>
             <List className={props.classes.toolbar}>
                 {gitData.repos.map((repoData, index) => {
                     return (

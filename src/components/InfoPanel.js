@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CardContent, CardActions, CardHeader, Button, Typography, CardActionArea, Collapse } from '@material-ui/core';
+import { CardContent, CardActions, CardHeader, Button, Typography, Collapse } from '@material-ui/core';
 import { KeyboardArrowUp } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -40,7 +40,8 @@ const Tag = ({ classes, topicName }) => (
         href={`https://github.com/topics/${topicName}`}
         className={classes.button}
         target="_blank"
-        rel="noreferrer noopener">
+        rel="noreferrer noopener"
+    >
         {topicName}
     </Button>
 );
@@ -53,11 +54,11 @@ const InfoPanel = props => {
     useEffect(() => togglePanel(true), [props]);
     return (
         <>
-            <CardActionArea>
-                <Typography variant="button" onClick={() => togglePanel(!panelIn)} className={classes.centerText}>
+            <Button fullWidth onClick={() => togglePanel(!panelIn)}>
+                <Typography variant="button" className={classes.centerText}>
                     <KeyboardArrowUp className={panelIn ? classes.arrow : classes.arrowShift} />
                 </Typography>
-            </CardActionArea>
+            </Button>
             <Collapse in={panelIn}>
                 <div className={classes.center}>
                     <CardHeader className={classes.centerText} title={repo.name} />

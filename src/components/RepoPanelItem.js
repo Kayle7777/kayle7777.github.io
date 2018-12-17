@@ -49,9 +49,7 @@ const styles = theme => ({
 
 const RepoPanelItem = props => {
     let { classes, selectedRepo, selectRepo, name, index, pinned } = props;
-    // eslint-disable-next-line
     const selected = selectedRepo == index;
-    // eslint-disable-next-line
     return (
         <ListItem
             selected={selected}

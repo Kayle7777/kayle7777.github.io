@@ -25,7 +25,7 @@ export default {
             useNextVariants: true,
         },
     }),
-    react: createMuiTheme({
+    react2: createMuiTheme({
         palette: {
             primary: {
                 light: '#33373f',
