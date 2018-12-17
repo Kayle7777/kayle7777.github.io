@@ -68,8 +68,7 @@ const RepoPanelItem = props => {
             onClick={() => {
                 setTheme(selectTheme(topics.map(each => each.node.topic.name)));
                 return selectRepo(selected ? null : index);
-            }}
-        >
+            }}>
             {pinned && (
                 <ListItemIcon>
                     <Star />
