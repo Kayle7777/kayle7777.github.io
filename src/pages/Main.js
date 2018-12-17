@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { List } from '@material-ui/core';
 import RepoPanelItem from '../components/RepoPanelItem';
@@ -11,8 +11,6 @@ const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
 });
-
-export const DataContext = createContext();
 
 const Main = props => {
     const [selectedRepo, selectRepo] = useState(null);
@@ -59,27 +57,29 @@ const Main = props => {
     }, gitData);
 
     return (
-        <DataContext.Provider value={gitData}>
-            <Frame name={gitData.owner.name}>
-                <List className={props.classes.toolbar}>
-                    {gitData.repos.map((repoData, index) => {
-                        return (
-                            <RepoPanelItem
-                                selectedRepo={selectedRepo}
-                                selectRepo={selectRepo}
-                                name={repoData.name}
-                                index={index}
-                                key={repoData.id}
-                                pinned={repoData.isPinned}
-                                topics={repoData.repositoryTopics.edges}
-                            />
-                        );
-                    })}
-                </List>
-                {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
-                {gitData.repos[selectedRepo] && <ReadmePanel readme={gitData.repos[selectedRepo].readme} />}
-            </Frame>
-        </DataContext.Provider>
+        <Frame name={gitData.owner.name}>
+            <List className={props.classes.toolbar}>
+                {gitData.repos.map((repoData, index) => {
+                    return (
+                        <RepoPanelItem
+                            selectedRepo={selectedRepo}
+                            selectRepo={selectRepo}
+                            name={repoData.name}
+                            index={index}
+                            key={repoData.id}
+                            pinned={repoData.isPinned}
+                        />
+                    );
+                })}
+            </List>
+            {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
+            {gitData.repos[selectedRepo] && (
+                <ReadmePanel
+                    topics={gitData.repos[selectedRepo].repositoryTopics.edges}
+                    readme={gitData.repos[selectedRepo].readme}
+                />
+            )}
+        </Frame>
     );
 };
 

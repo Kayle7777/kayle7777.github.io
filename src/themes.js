@@ -21,8 +21,11 @@ export default {
                 default: '#faf4f1',
             },
         },
+        typography: {
+            useNextVariants: true,
+        },
     }),
-    react2: createMuiTheme({
+    react: createMuiTheme({
         palette: {
             primary: {
                 light: '#33373f',
@@ -32,6 +35,9 @@ export default {
             secondary: {
                 main: '#61dafb',
             },
+        },
+        typography: {
+            useNextVariants: true,
         },
     }),
 };
