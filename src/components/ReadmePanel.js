@@ -9,7 +9,16 @@ const style = theme => ({});
 const ReadmePanel = ({ readme, classes, topics }) => {
     // eslint-disable-next-line
     const [theme, setTheme] = useContext(ThemeSelector);
-    useEffect(() => setTheme(selectTheme(topics.map(each => each.node.topic.name))), [topics]);
+    useEffect(
+        () => {
+            let pickedTheme = selectTheme(topics);
+            if (pickedTheme === 'default') {
+                if (theme === 'default') return;
+                else return setTheme('default');
+            } else return setTheme(pickedTheme);
+        },
+        [readme]
+    );
     return (
         <>
             {readme && (

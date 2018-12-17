@@ -75,7 +75,7 @@ const Main = props => {
             {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
             {gitData.repos[selectedRepo] && (
                 <ReadmePanel
-                    topics={gitData.repos[selectedRepo].repositoryTopics.edges}
+                    topics={gitData.repos[selectedRepo].repositoryTopics.edges.map(each => each.node.topic.name)}
                     readme={gitData.repos[selectedRepo].readme}
                 />
             )}
