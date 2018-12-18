@@ -75,7 +75,7 @@ const InfoPanel = props => {
                                     const topicName = each.node.topic.name;
                                     return (
                                         <Tag
-                                            key={topicName.substr(0, 5) + '...'}
+                                            key={topicName.substr(0, 5) + Math.floor(Math.random() * 1000) + '...'}
                                             classes={classes}
                                             topicName={topicName}
                                         />

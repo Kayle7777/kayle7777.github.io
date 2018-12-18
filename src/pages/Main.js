@@ -21,40 +21,35 @@ const Main = props => {
     };
 
     const fetchData = async () => {
-        let cached = sessionStorage.getItem('apiData');
-        if (!cached) {
-            let [repos, owner, pinnedRepos] = await Promise.all([
-                graphql(repoSchema),
-                graphql(ownerSchema),
-                graphql(pinnedRepoSchema),
-            ]);
-            repos.data.viewer.repositories.nodes = repos.data.viewer.repositories.nodes.filter(e => {
-                let pinnedFilter = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
-                return !pinnedFilter.includes(e.name);
-            });
-            pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => {
-                e.node['isPinned'] = true;
-                return e.node;
-            });
-            repos.data.viewer.repositories.nodes.unshift(...pinnedRepos.reverse());
-            // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
-            let finalData = {
-                owner: owner.data.viewer,
-                repos: repos.data.viewer.repositories.nodes,
-            };
-            setRepos(finalData);
-            sessionStorage.setItem('apiData', JSON.stringify(finalData));
-            return pickInitialRepo(finalData.repos);
-        } else {
-            cached = JSON.parse(cached);
-            setRepos(cached);
-            return pickInitialRepo(cached.repos);
-        }
+        let [repos, owner, pinnedRepos] = await Promise.all([
+            graphql(repoSchema),
+            graphql(ownerSchema),
+            graphql(pinnedRepoSchema),
+        ]);
+        repos.data.viewer.repositories.nodes = repos.data.viewer.repositories.nodes.filter(e => {
+            let pinnedFilter = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
+            return !pinnedFilter.includes(e.name);
+        });
+        pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => {
+            e.node['isPinned'] = true;
+            return e.node;
+        });
+        repos.data.viewer.repositories.nodes.unshift(...pinnedRepos.reverse());
+        // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
+        let finalData = {
+            owner: owner.data.viewer,
+            repos: repos.data.viewer.repositories.nodes,
+        };
+        return finalData;
     };
 
     useEffect(() => {
-        fetchData();
+        const cached = JSON.parse(sessionStorage.getItem('apiData'));
+        if (cached) return setRepos(cached);
+        else fetchData().then(data => setRepos(data));
     }, gitData);
+
+    useEffect(() => pickInitialRepo(gitData.repos), [gitData.repos]);
 
     return (
         <Frame name={gitData.owner.name} home={() => pickInitialRepo(gitData.repos)}>

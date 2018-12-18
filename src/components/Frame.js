@@ -77,7 +77,6 @@ const Frame = props => {
                             keepMounted: true,
                         }}
                     >
-                        {/* <div className={classes.toolbar} /> */}
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
                                 sort by last updated
