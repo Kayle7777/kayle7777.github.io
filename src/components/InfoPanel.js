@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { CardContent, CardActions, CardHeader, Button, Typography, Collapse } from '@material-ui/core';
 import { KeyboardArrowUp } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
@@ -40,8 +40,7 @@ const Tag = ({ classes, topicName }) => (
         href={`https://github.com/topics/${topicName}`}
         className={classes.button}
         target="_blank"
-        rel="noreferrer noopener"
-    >
+        rel="noreferrer noopener">
         {topicName}
     </Button>
 );

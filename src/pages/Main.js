@@ -6,6 +6,7 @@ import Frame from '../components/Frame';
 import ReadmePanel from '../components/ReadmePanel';
 import InfoPanel from '../components/InfoPanel';
 import API from '../utils/gitHubGet';
+
 const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
 
 const styles = theme => ({
@@ -15,6 +16,10 @@ const styles = theme => ({
 const Main = props => {
     const [selectedRepo, selectRepo] = useState(null);
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
+    const [theme, setTheme, selectTheme] = props.themeContext;
+    const topics = gitData.repos[selectedRepo]
+        ? gitData.repos[selectedRepo].repositoryTopics.edges.map(each => each.node.topic.name)
+        : [];
 
     const pickInitialRepo = nodeList => {
         for (let i in nodeList) if (nodeList[i].name === 'kayle7777.github.io') return selectRepo(i);
@@ -51,6 +56,17 @@ const Main = props => {
 
     useEffect(() => pickInitialRepo(gitData.repos), [gitData.repos]);
 
+    const pickedTheme = selectTheme(topics);
+    useEffect(
+        () => {
+            if (pickedTheme === 'default') {
+                if (theme === 'default') return;
+                else return setTheme('default');
+            } else return setTheme(pickedTheme);
+        },
+        [gitData.repos[selectedRepo]]
+    );
+
     return (
         <Frame name={gitData.owner.name} home={() => pickInitialRepo(gitData.repos)}>
             <List className={props.classes.toolbar}>
@@ -68,12 +84,7 @@ const Main = props => {
                 })}
             </List>
             {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
-            {gitData.repos[selectedRepo] && (
-                <ReadmePanel
-                    topics={gitData.repos[selectedRepo].repositoryTopics.edges.map(each => each.node.topic.name)}
-                    readme={gitData.repos[selectedRepo].readme}
-                />
-            )}
+            {gitData.repos[selectedRepo] && <ReadmePanel readme={gitData.repos[selectedRepo].readme} />}
         </Frame>
     );
 };
