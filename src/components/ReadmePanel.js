@@ -20,17 +20,13 @@ const ReadmePanel = props => {
         [readme]
     );
     return (
-        <>
-            {readme && (
-                <Card>
-                    <CardContent>
-                        <Typography component="div" variant="body2">
-                            {compiler(readme.text)}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            )}
-        </>
+        <Card>
+            <CardContent>
+                <Typography component="div" variant="body2">
+                    {compiler(readme ? readme.text : '')}
+                </Typography>
+            </CardContent>
+        </Card>
     );
 };
 

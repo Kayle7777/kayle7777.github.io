@@ -40,7 +40,7 @@ export default {
                     description
                     id
                     url
-                    repositoryTopics(last: 4) {
+                    repositoryTopics(last: 12) {
                         edges {
                             node {
                                 topic {
@@ -77,7 +77,7 @@ export default {
                         description
                         id
                         url
-                        repositoryTopics(last: 10) {
+                        repositoryTopics(last: 12) {
                             edges {
                                 node {
                                     topic {
