@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { CardContent, CardActions, CardHeader, Button, Typography, Collapse } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { CardContent, CardActions, CardHeader, Grid, Button, Typography, Collapse, Tooltip } from '@material-ui/core';
 import { KeyboardArrowUp } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -36,13 +36,18 @@ const styles = theme => ({
 });
 
 const Tag = ({ classes, topicName }) => (
-    <Button
-        href={`https://github.com/topics/${topicName}`}
-        className={classes.button}
-        target="_blank"
-        rel="noreferrer noopener">
-        {topicName}
-    </Button>
+    <Grid item xs="auto">
+        <Tooltip title={topicName} placement="top">
+            <Button
+                href={`https://github.com/topics/${topicName}`}
+                className={classes.button}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={topicName}>
+                {topicName.length > 8 ? topicName.slice(0, 8) + '...' : topicName}
+            </Button>
+        </Tooltip>
+    </Grid>
 );
 
 const InfoPanel = props => {
@@ -70,16 +75,18 @@ const InfoPanel = props => {
                         {topics.length > 0 && (
                             <>
                                 <Typography variant="button">Tags: </Typography>
-                                {topics.map(each => {
-                                    const topicName = each.node.topic.name;
-                                    return (
-                                        <Tag
-                                            key={topicName.substr(0, 5) + Math.floor(Math.random() * 1000) + '...'}
-                                            classes={classes}
-                                            topicName={topicName}
-                                        />
-                                    );
-                                })}
+                                <Grid container>
+                                    {topics.map(each => {
+                                        const topicName = each.node.topic.name;
+                                        return (
+                                            <Tag
+                                                key={topicName.substr(0, 5) + Math.floor(Math.random() * 1000) + '...'}
+                                                classes={classes}
+                                                topicName={topicName}
+                                            />
+                                        );
+                                    })}
+                                </Grid>
                             </>
                         )}
                     </CardActions>
