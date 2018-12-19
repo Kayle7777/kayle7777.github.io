@@ -17,11 +17,10 @@ const Main = props => {
     const [selectedRepo, selectRepo] = useState(null);
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
     const [theme, setTheme, selectTheme] = props.themeContext;
-    const topics = gitData.repos[selectedRepo]
-        ? gitData.repos[selectedRepo].repositoryTopics.edges.map(each => each.node.topic.name)
-        : [];
+    const currentRepo = gitData.repos[selectedRepo];
+    const topics = currentRepo ? currentRepo.repositoryTopics.edges.map(each => each.node.topic.name) : [];
 
-    const pickInitialRepo = nodeList => {
+    const pickHomeRepo = nodeList => {
         for (let i in nodeList) if (nodeList[i].name === 'kayle7777.github.io') return selectRepo(i);
     };
 
@@ -52,9 +51,10 @@ const Main = props => {
         const cached = JSON.parse(sessionStorage.getItem('apiData'));
         if (cached) return setRepos(cached);
         else fetchData().then(data => setRepos(data));
+        gitData;
     }, gitData);
 
-    useEffect(() => pickInitialRepo(gitData.repos), [gitData.repos]);
+    useEffect(() => pickHomeRepo(gitData.repos), [gitData.repos]);
 
     const pickedTheme = selectTheme(topics);
     useEffect(
@@ -64,11 +64,11 @@ const Main = props => {
                 else return setTheme('default');
             } else return setTheme(pickedTheme);
         },
-        [gitData.repos[selectedRepo]]
+        [currentRepo]
     );
 
     return (
-        <Frame name={gitData.owner.name} home={() => pickInitialRepo(gitData.repos)}>
+        <Frame owner={gitData.owner} home={() => pickHomeRepo(gitData.repos)}>
             <List className={props.classes.toolbar}>
                 {gitData.repos.map((repoData, index) => {
                     return (
@@ -83,8 +83,8 @@ const Main = props => {
                     );
                 })}
             </List>
-            {gitData.repos[selectedRepo] && <InfoPanel owner={gitData.owner} repo={gitData.repos[selectedRepo]} />}
-            {gitData.repos[selectedRepo] && <ReadmePanel readme={gitData.repos[selectedRepo].readme} />}
+            {currentRepo && <InfoPanel repo={currentRepo} />}
+            {currentRepo && <ReadmePanel readme={currentRepo.readme} />}
         </Frame>
     );
 };

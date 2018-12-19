@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, IconButton, Hidden, Divider, Drawer, CardContent } from '@material-ui/core';
-import { Menu as MenuIcon, Home as HomeIcon } from '@material-ui/icons';
+import { Menu as MenuIcon, Home as HomeIcon, AccountCircle } from '@material-ui/icons';
 
 const styles = theme => ({
     root: {
@@ -39,7 +39,7 @@ const styles = theme => ({
 });
 
 const Frame = props => {
-    const { classes, theme, name, home } = props;
+    const { classes, theme, owner, home } = props;
     const [ListItems, ...Rest] = props.children;
     const [mobileOpen, navToggle] = useState(false);
     return (
@@ -53,11 +53,14 @@ const Frame = props => {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" noWrap className={classes.grow}>
-                        {name}
+                    <Typography variant="h6" noWrap className={classes.grow} onClick={() => home()}>
+                        {owner.name}
                     </Typography>
                     <IconButton aria-label="Go to main page" onClick={() => home()}>
                         <HomeIcon />
+                    </IconButton>
+                    <IconButton aria-label="Jesse Info">
+                        <AccountCircle />
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -79,7 +82,7 @@ const Frame = props => {
                     >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
-                                sort by last updated
+                                sorted by last updated
                             </Typography>
                         </CardContent>
                         <Divider />
@@ -97,7 +100,7 @@ const Frame = props => {
                     >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
-                                sort by last updated
+                                sorted by last updated
                             </Typography>
                         </CardContent>
                         <Divider />

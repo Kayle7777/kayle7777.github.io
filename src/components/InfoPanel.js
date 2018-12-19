@@ -18,7 +18,7 @@ const styles = theme => ({
         textAlign: 'center',
     },
     arrow: {
-        fontSize: '2.5rem',
+        fontSize: '2rem',
         transform: 'rotate(0deg)',
         transition: theme.transitions.create(['transform'], {
             easing: theme.transitions.easing.sharp,
@@ -26,7 +26,7 @@ const styles = theme => ({
         }),
     },
     arrowShift: {
-        fontSize: '2.5rem',
+        fontSize: '2rem',
         transform: 'rotate(180deg)',
         transition: theme.transitions.create(['transform'], {
             easing: theme.transitions.easing.sharp,
@@ -43,19 +43,19 @@ const Tag = ({ classes, topicName }) => (
                 className={classes.button}
                 target="_blank"
                 rel="noreferrer noopener"
-                aria-label={topicName}>
-                {topicName.length > 8 ? topicName.slice(0, 8) + '...' : topicName}
+                aria-label={topicName}
+            >
+                {topicName.length > 11 ? topicName.slice(0, 11) + '...' : topicName}
             </Button>
         </Tooltip>
     </Grid>
 );
 
 const InfoPanel = props => {
-    //eslint-disable-next-line
-    const { repo, owner, classes } = props;
+    const { repo, classes } = props;
     const topics = repo.repositoryTopics.edges;
-    const [panelIn, togglePanel] = useState(true);
-    useEffect(() => togglePanel(true), [props]);
+    const [panelIn, togglePanel] = useState(false);
+    useEffect(() => togglePanel(false), [props]);
     return (
         <>
             <Button fullWidth onClick={() => togglePanel(!panelIn)}>
@@ -65,7 +65,7 @@ const InfoPanel = props => {
             </Button>
             <Collapse in={panelIn}>
                 <div className={classes.center}>
-                    <CardHeader className={classes.centerText} title={repo.name} />
+                    {/* <CardHeader className={classes.centerText} title={repo.name} /> */}
                     <CardContent>
                         <Typography align="center" variant="overline">
                             {repo.description}
