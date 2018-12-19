@@ -2,6 +2,7 @@
     "name": "client",
     "version": "0.1.0",
     "private": true,
+    "homepage": "https://kayle7777.github.io",
     "dependencies": {
         "@material-ui/core": "^3.6.1",
         "@material-ui/icons": "^3.0.1",
@@ -20,9 +21,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",
         "predeploy": "yarn build",
-        "deploy": "gh-pages -d build"
+        "deploy": "node ./deploy.js",
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": "react-app"

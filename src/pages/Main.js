@@ -51,7 +51,6 @@ const Main = props => {
         const cached = JSON.parse(sessionStorage.getItem('apiData'));
         if (cached) return setRepos(cached);
         else fetchData().then(data => setRepos(data));
-        gitData;
     }, gitData);
 
     useEffect(() => pickHomeRepo(gitData.repos), [gitData.repos]);
