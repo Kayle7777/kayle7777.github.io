@@ -53,7 +53,7 @@ const Tag = ({ classes, topicName }) => (
 
 const InfoPanel = props => {
     const { repo, classes } = props;
-    const topics = repo.repositoryTopics.edges;
+    const topics = repo.repositoryTopics.edges || [];
     const [panelIn, togglePanel] = useState(false);
     useEffect(() => togglePanel(false), [props]);
     return (
@@ -65,7 +65,6 @@ const InfoPanel = props => {
             </Button>
             <Collapse in={panelIn}>
                 <div className={classes.center}>
-                    {/* <CardHeader className={classes.centerText} title={repo.name} /> */}
                     <CardContent>
                         <Typography align="center" variant="overline">
                             {repo.description}
