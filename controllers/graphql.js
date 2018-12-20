@@ -1,6 +1,5 @@
-import axios from 'axios';
-
-export default {
+const axios = require('axios');
+module.exports = {
     // new github v4 API, using graphQL
     graphql: async schema => {
         const axiosGitHubGraphQL = axios.create({

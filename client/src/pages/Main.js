@@ -5,9 +5,7 @@ import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
 import ReadmePanel from '../components/ReadmePanel';
 import InfoPanel from '../components/InfoPanel';
-import API from '../utils/gitHubGet';
-
-const { graphql, repoSchema, pinnedRepoSchema, ownerSchema } = API;
+import axios from 'axios';
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
@@ -25,26 +23,8 @@ const Main = props => {
     };
 
     const fetchData = async () => {
-        let [repos, owner, pinnedRepos] = await Promise.all([
-            graphql(repoSchema),
-            graphql(ownerSchema),
-            graphql(pinnedRepoSchema),
-        ]);
-        repos.data.viewer.repositories.nodes = repos.data.viewer.repositories.nodes.filter(e => {
-            let pinnedFilter = pinnedRepos.data.viewer.pinnedRepositories.edges.map(each => each.node.name);
-            return !pinnedFilter.includes(e.name);
-        });
-        pinnedRepos = pinnedRepos.data.viewer.pinnedRepositories.edges.map(e => {
-            e.node['isPinned'] = true;
-            return e.node;
-        });
-        repos.data.viewer.repositories.nodes.unshift(...pinnedRepos.reverse());
-        // Correctly set the state to OBJECT owner, ARRAY repos, ARRAY pinnedRepos
-        let finalData = {
-            owner: owner.data.viewer,
-            repos: repos.data.viewer.repositories.nodes,
-        };
-        return finalData;
+        let data = await axios.post('http://localhost:3001/api/gitHub/graphql');
+        return data.data;
     };
 
     useEffect(() => {
