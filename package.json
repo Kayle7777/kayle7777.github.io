@@ -14,7 +14,7 @@
         "seed": "node scripts/seedDB.js",
         "install": "cd client && yarn install",
         "build": "cd client && npm run build",
-        "heroku-postbuild": "npm run build",
+        "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
         "rtest": "cd client && yarn test",
         "apitest": "set NODE_ENV=test&& jest ./tests",
         "test": "set NODE_ENV=test&& jest ./tests&&cd client&& yarn test"
