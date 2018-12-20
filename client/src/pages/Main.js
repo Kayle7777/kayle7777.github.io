@@ -23,7 +23,7 @@ const Main = props => {
     };
 
     const fetchData = async () => {
-        let data = await axios.post('http://localhost:3001/api/gitHub/graphql');
+        let data = await axios.post('/api/gitHub/graphql');
         return data.data;
     };
 
