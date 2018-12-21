@@ -12,7 +12,7 @@ export const selectTheme = listOfTopics => {
 const App = props => {
     const [theme, setTheme] = useState('default');
     return (
-        <MuiThemeProvider theme={themes[theme] ? themes[theme] : themes.default}>
+        <MuiThemeProvider theme={themes[theme] || themes.default}>
             <CssBaseline />
             <Main themeContext={[theme, setTheme, selectTheme]} />
         </MuiThemeProvider>
