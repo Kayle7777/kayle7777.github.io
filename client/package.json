@@ -34,6 +34,8 @@
         "not ie <= 11",
         "not op_mini all"
     ],
-    "devDependencies": {},
+    "devDependencies": {
+        "supertest": "^3.3.0"
+    },
     "proxy": "http://localhost:3001"
 }

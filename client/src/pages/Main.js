@@ -14,7 +14,7 @@ const styles = theme => ({
 const Main = props => {
     const [selectedRepo, selectRepo] = useState(null);
     const [gitData, setRepos] = useState({ owner: {}, repos: [] });
-    const [theme, setTheme, selectTheme] = props.themeContext;
+    const [theme, setTheme, selectTheme] = props.themeContext || ['default', () => {}, () => {}];
     const currentRepo = gitData.repos[selectedRepo];
     const topics = currentRepo ? currentRepo.repositoryTopics.edges.map(each => each.node.topic.name) : [];
 
@@ -23,14 +23,23 @@ const Main = props => {
     };
 
     const fetchData = async () => {
-        let data = await axios.post('/api/gitHub/graphql');
-        return data.data;
+        try {
+            let data = await axios.post('/api/gitHub/graphql');
+            return data.data;
+        } catch (err) {
+            return { owner: {}, repos: [] };
+        }
     };
 
     useEffect(() => {
         const cached = JSON.parse(sessionStorage.getItem('apiData'));
-        if (cached) return setRepos(cached);
-        else fetchData().then(data => setRepos(data));
+        if (cached && cached.owner.name) return setRepos(cached);
+        else if (props.testData) return setRepos(props.testData);
+        else
+            fetchData().then(data => {
+                sessionStorage.setItem('apiData', JSON.stringify(data));
+                setRepos(data);
+            });
     }, gitData);
 
     useEffect(() => pickHomeRepo(gitData.repos), [gitData.repos]);
