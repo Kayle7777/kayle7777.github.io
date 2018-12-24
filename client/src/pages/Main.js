@@ -18,31 +18,14 @@ const Main = props => {
     const currentRepo = gitData.repos[selectedRepo];
     const topics = currentRepo ? currentRepo.repositoryTopics.edges.map(each => each.node.topic.name) : [];
 
-    const pickHomeRepo = nodeList => {
-        for (let i in nodeList) if (nodeList[i].name === 'kayle7777.github.io') return selectRepo(i);
-    };
-
-    const fetchData = async () => {
-        try {
-            let data = await fetch('/api/gitHub/graphql');
-            return data.data;
-        } catch (err) {
-            return;
-        }
-    };
-
     useEffect(() => {
         const cached = JSON.parse(sessionStorage.getItem('apiData'));
         if (cached && cached.owner.name) return setRepos(cached);
-        else if (process.env.NODE_ENV === 'test') {
-            if (props.testData) return setRepos(props.testData);
-            else return { owner: {}, repos: [] };
-        } else
+        else if (process.env.NODE_ENV === 'test') return setRepos(props.testData || { owner: {}, repos: [] });
+        else
             fetchData().then(data => {
-                if (data) {
-                    sessionStorage.setItem('apiData', JSON.stringify(data));
-                    setRepos(data);
-                }
+                sessionStorage.setItem('apiData', JSON.stringify(data));
+                setRepos(data);
             });
     }, gitData);
 
@@ -77,6 +60,19 @@ const Main = props => {
             {currentRepo && <ReadmePanel readme={currentRepo.readme} />}
         </Frame>
     );
+
+    function pickHomeRepo(nodeList) {
+        for (let i in nodeList) if (nodeList[i].name === 'kayle7777.github.io') return selectRepo(i);
+    }
+
+    async function fetchData() {
+        try {
+            let data = await fetch('/api/gitHub/graphql');
+            return data.data;
+        } catch (err) {
+            return { owner: {}, repos: [] };
+        }
+    }
 };
 
 export default withStyles(styles, { withTheme: true })(Main);
