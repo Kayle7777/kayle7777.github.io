@@ -42,6 +42,7 @@ const Frame = props => {
     const { classes, theme, owner, home } = props;
     const [ListItems, ...Rest] = props.children;
     const [mobileOpen, navToggle] = useState(false);
+    const titleString = 'sorted by last updated';
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -82,7 +83,7 @@ const Frame = props => {
                     >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
-                                sorted by last updated
+                                {titleString}
                             </Typography>
                         </CardContent>
                         <Divider />
@@ -100,7 +101,7 @@ const Frame = props => {
                     >
                         <CardContent className={classes.toolbar}>
                             <Typography noWrap align="center" variant="overline">
-                                sorted by last updated
+                                {titleString}
                             </Typography>
                         </CardContent>
                         <Divider />
