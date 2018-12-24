@@ -54,8 +54,8 @@ const Tag = ({ classes, topicName }) => (
 const InfoPanel = props => {
     const { repo, classes } = props;
     const topics = repo.repositoryTopics.edges || [];
-    const [panelIn, togglePanel] = useState(false);
-    useEffect(() => togglePanel(false), [props]);
+    const [panelIn, togglePanel] = useState(true);
+    useEffect(() => togglePanel(true), [props]);
     return (
         <>
             <Button fullWidth onClick={() => togglePanel(!panelIn)}>
