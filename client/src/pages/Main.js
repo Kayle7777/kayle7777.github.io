@@ -51,10 +51,8 @@ const Main = props => {
     const pickedTheme = selectTheme(topics);
     useEffect(
         () => {
-            if (pickedTheme === 'default') {
-                if (theme === 'default') return;
-                else return setTheme('default');
-            } else return setTheme(pickedTheme);
+            if (pickedTheme === theme) return;
+            else return setTheme(pickedTheme);
         },
         [currentRepo]
     );
