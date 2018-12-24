@@ -11,9 +11,17 @@ describe('testing Main.js', () => {
             const apiResponse = await request(app).post('/api/gitHub/graphql');
             const { getByText } = render(<Main testData={apiResponse.body} />);
             const header = getByText('Jesse Webb');
+            const mainReadmePanel = getByText('kayle7777.github.io');
             expect(header.textContent).toBe('Jesse Webb');
         } catch (e) {
             throw new Error(e);
+        }
+    });
+    test('render Main with no data', () => {
+        try {
+            render(<Main />);
+        } catch (err) {
+            throw err;
         }
     });
 });

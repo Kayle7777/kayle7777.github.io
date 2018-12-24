@@ -5,7 +5,7 @@ import RepoPanelItem from '../components/RepoPanelItem';
 import Frame from '../components/Frame';
 import ReadmePanel from '../components/ReadmePanel';
 import InfoPanel from '../components/InfoPanel';
-import axios from 'axios';
+import { post as fetch } from 'axios';
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
@@ -24,21 +24,25 @@ const Main = props => {
 
     const fetchData = async () => {
         try {
-            let data = await axios.post('/api/gitHub/graphql');
+            let data = await fetch('/api/gitHub/graphql');
             return data.data;
         } catch (err) {
-            return { owner: {}, repos: [] };
+            return;
         }
     };
 
     useEffect(() => {
         const cached = JSON.parse(sessionStorage.getItem('apiData'));
         if (cached && cached.owner.name) return setRepos(cached);
-        else if (props.testData) return setRepos(props.testData);
-        else
+        else if (process.env.NODE_ENV === 'test') {
+            if (props.testData) return setRepos(props.testData);
+            else return { owner: {}, repos: [] };
+        } else
             fetchData().then(data => {
-                sessionStorage.setItem('apiData', JSON.stringify(data));
-                setRepos(data);
+                if (data) {
+                    sessionStorage.setItem('apiData', JSON.stringify(data));
+                    setRepos(data);
+                }
             });
     }, gitData);
 
