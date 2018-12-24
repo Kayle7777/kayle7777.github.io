@@ -27,4 +27,4 @@ const ReadmePanel = props => {
     );
 };
 
-export default withStyles(style, { withTheme: true })(ReadmePanel);
+export default withStyles(style)(ReadmePanel);

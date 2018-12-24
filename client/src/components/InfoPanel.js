@@ -95,4 +95,4 @@ const InfoPanel = props => {
     );
 };
 
-export default withStyles(styles, { withTheme: true })(InfoPanel);
+export default withStyles(styles)(InfoPanel);

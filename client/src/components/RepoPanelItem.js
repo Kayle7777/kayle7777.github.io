@@ -71,4 +71,4 @@ const RepoPanelItem = props => {
     );
 };
 
-export default withStyles(styles, { withTheme: true })(RepoPanelItem);
+export default withStyles(styles)(RepoPanelItem);

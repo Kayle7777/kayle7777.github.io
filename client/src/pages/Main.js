@@ -75,4 +75,4 @@ const Main = props => {
     }
 };
 
-export default withStyles(styles, { withTheme: true })(Main);
+export default withStyles(styles)(Main);
