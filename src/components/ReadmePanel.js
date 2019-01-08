@@ -8,7 +8,7 @@ const style = theme => ({});
 const compilerOptions = {
     overrides: {
         a: {
-            component: props => <Button color="default" target="_blank" rel="noreferrer noopener" {...props} />,
+            component: props => <Button color="secondary" target="_blank" rel="noreferrer noopener" {...props} />,
         },
     },
 };
