@@ -6,6 +6,7 @@ import Frame from '../components/Frame';
 import ReadmePanel from '../components/ReadmePanel';
 import InfoPanel from '../components/InfoPanel';
 import { post as fetch } from 'axios';
+import adapter from 'axios/lib/adapters/http';
 
 const styles = theme => ({
     toolbar: theme.mixins.toolbar,
@@ -67,7 +68,7 @@ const Main = props => {
 
     async function fetchData() {
         try {
-            let data = await fetch('https://kayle7777.herokuapp.com/api/gitHub/graphql');
+            let data = await fetch('https://kayle7777.herokuapp.com/api/gitHub/graphql', undefined, { adapter });
             return data.data;
         } catch (err) {
             return { owner: {}, repos: [] };
