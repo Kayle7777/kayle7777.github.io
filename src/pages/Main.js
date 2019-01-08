@@ -67,7 +67,7 @@ const Main = props => {
 
     async function fetchData() {
         try {
-            let data = await fetch('/api/gitHub/graphql');
+            let data = await fetch('https://kayle7777.herokuapp.com/api/gitHub/graphql');
             return data.data;
         } catch (err) {
             return { owner: {}, repos: [] };
